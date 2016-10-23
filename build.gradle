@@ -9,7 +9,7 @@ dependencies {
     compile 'ch.qos.logback:logback-classic:+'
     compileOnly 'org.projectlombok:lombok:+'
     testCompile 'junit:junit:+'
-    testCompile 'com.h2database:h2:+'
+    compile 'com.h2database:h2:+'
 
     // Tomcat internal libraries
     providedCompile 'org.apache.tomcat:tomcat-api:+'
