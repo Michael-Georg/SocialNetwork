@@ -1,10 +1,11 @@
 package Dao;
 
 import java.util.List;
+import java.util.Optional;
 
-public interface DaoFactory<E, K> {
+public interface Dao<E, K> {
      List<E> getAll();
-    E getEntity(K id);
+    Optional<E> getEntity(K id);
     void update(E entity);
     void delete(K id);
     void create(E entity);

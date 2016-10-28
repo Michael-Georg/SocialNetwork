@@ -1,0 +1,85 @@
+body {
+    color: #8f8f8f;
+    font: 12px Tahoma, sans-serif;
+    background-color: #f8f8f8;
+    border-top: 5px solid #7e7e7e;
+    margin: 0;
+}
+
+input[name="username"] {
+    background-color: #f3f3f3;
+    border: 1px solid #e7e7e7;
+    height: 30px;
+    color: #b2b2b2;
+    padding: 0 10px;
+    vertical-align: top;
+}
+input[name="password"] {
+    background-color: #f3f3f3;
+    border: 1px solid #e7e7e7;
+    height: 30px;
+    color: #b2b2b2;
+    padding: 0 10px;
+    vertical-align: top;
+}
+
+form[name="login"] {
+    width: 280px;
+    height: 300px;
+}
+
+button {
+    color: #fff;
+    background-color: #29c5e6;
+    border: none;
+    height: 32px;
+    font-family: 'Oswald', sans-serif;
+}
+
+#wrapper {
+    max-width: 960px;
+    margin: auto;
+}
+
+header {
+    background-color: #b1b6ff;
+    font : 20px/60px 'Comic sans ms';
+    /*padding: 10px;*/
+}
+
+h1 {
+    color: #7e7e7e;
+    text-align: right;
+    margin: 0;
+    padding: 0 10px;
+}
+aside {
+    font : 25px/35px 'Oswald';
+    float: right;
+    width: 250px;
+}
+.aside-menu li{
+    list-style-type: square;
+    font-weight: 300;
+    border-top: 1px solid #e7e7e7;
+}
+.aside-menu li:first-child{
+    border: none;
+}
+
+.aside-menu a{
+    color: #8f8f8f;
+}
+
+aside > p{
+    overflow:hidden;
+    position:relative;
+    background: #f3f3f3;
+    border: 1px solid #e7e7e7;
+    padding:  10px;
+}
+
+section{
+    margin-right: 280px;
+    padding-bottom: 50px;
+}
