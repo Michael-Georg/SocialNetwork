@@ -1,4 +1,6 @@
-package servlets.filters;
+package servlets;
+
+import lombok.extern.java.Log;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,8 +11,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
 
+@Log
 @WebServlet("/location")
-public class LocationFilter extends HttpServlet {
+public class Localization extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -18,8 +21,9 @@ public class LocationFilter extends HttpServlet {
         Optional<String> lang = Optional.ofNullable(session.getAttribute("lang").toString());
         if (lang.isPresent())
             session.setAttribute("lang",
-                    lang.get().equals("ru") ? "en" : "ru" );
-        resp.sendRedirect("Profile");
+                    lang.get().equals("ru") ? "en" : "ru");
+        log.info(() -> session.getAttribute("URL").toString());
+        resp.sendRedirect(session.getAttribute("URL").toString());
     }
 
 }
