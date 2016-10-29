@@ -55,7 +55,4 @@ public interface ConnectionPool extends AutoCloseable {
         }
     }
 
-    default int getActiveConnections(){
-        return getConnectionPool().size();
-    }
 }

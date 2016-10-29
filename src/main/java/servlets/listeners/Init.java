@@ -2,6 +2,8 @@ package servlets.listeners;
 
 import Dao.ConnectionPool;
 import Dao.PersonDao;
+import lombok.extern.java.Log;
+import org.h2.Driver;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -11,25 +13,39 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static servlets.ServletConst.*;
+
+@Log
 @WebListener
 public class Init implements ServletContextListener {
-    private static final String config = "WEB-INF/classes/db.properties";
-    private static final String PERSON_DAO = "personDao";
-    private static final String pathToInit = "WEB-INF/classes/init.sql";
 
+    private static ConnectionPool connectionPool;
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         ServletContext context = sce.getServletContext();
         String realPath = context.getRealPath("/");
-        ConnectionPool connectionPool = ConnectionPool.create(realPath + config);
+        connectionPool = ConnectionPool.create(realPath + config);
         initDb(connectionPool, realPath + pathToInit);
         context.setAttribute(PERSON_DAO, new PersonDao(connectionPool));
+    }
+
+    @Override
+    public void contextDestroyed(ServletContextEvent sce) {
+        try {
+            connectionPool.close();
+            Driver driver = Driver.load();
+            DriverManager.deregisterDriver(driver);
+        } catch (SQLException e) {
+            log.warning(e::getMessage);
+        }
+        log.info(() -> "Connection pool and DBManager closed" );
     }
 
     public void initDb(ConnectionPool connectionPool, String pathToInit) {

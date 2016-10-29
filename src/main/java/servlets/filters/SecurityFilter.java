@@ -11,17 +11,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+import static servlets.ServletConst.PERSON;
+
 @Log
 @WebFilter("/*")
 public class SecurityFilter extends HttpFilter {
 
-    private static final String KEY = "person";
-
     @Override
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpSession session = request.getSession(true);
-        log.info(() -> "Security Filter" + request.getRequestURI()  + " ");
-        if (session.getAttribute(KEY) != null)
+        log.info(request::getRequestURI);
+        if (session.getAttribute(PERSON) != null)
             chain.doFilter(request, response);
         else
             request.getRequestDispatcher("Login").forward(request, response);

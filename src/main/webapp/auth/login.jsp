@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>login</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/styles.css" type="text/css"/>
 </head>
 <body>
 <div id="wrapper">
