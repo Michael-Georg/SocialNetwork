@@ -6,7 +6,9 @@ repositories {
 }
 
 dependencies {
-    compile 'ch.qos.logback:logback-classic:+'
+    compile 'ch.qos.logback:logback-classic:+',
+            'org.apache.taglibs:taglibs-standard-impl:+',
+            'org.apache.taglibs:taglibs-standard-spec:+'
     compileOnly 'org.projectlombok:lombok:+'
     testCompile 'junit:junit:+'
     compile 'com.h2database:h2:+'

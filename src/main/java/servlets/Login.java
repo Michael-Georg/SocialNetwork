@@ -34,13 +34,14 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         log.info(() -> "Login");
+        HttpSession session = req.getSession(true);
         Map<String, String[]> map = req.getParameterMap();
 
         Optional<Person> person = personDao.isRegistered(map.get("username")[0], map.get("password")[0]);
         if (person.isPresent()) {
-            HttpSession session = req.getSession(true);
             session.setAttribute(KEY, person.get());
-            resp.sendRedirect("Profile");
+            session.setAttribute("lang", "en");
+            resp.sendRedirect("/Profile/" + person.get().getId());
         } else {
             req.setAttribute("errorMsg", "TRY AGAIN");
             req.getRequestDispatcher("/auth/login.jsp").forward(req, resp);

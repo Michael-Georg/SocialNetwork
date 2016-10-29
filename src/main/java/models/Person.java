@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @ToString
 @Builder
 public class Person {
-    private final Long id;
+    private final Integer id;
     private final String firstName;
     private final String lastName;
     private final LocalDate dob;

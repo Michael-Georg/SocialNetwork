@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
-public class PersonDao implements Dao<Person, Long> {
-    private static final String SQL1 = "SELECT first_name, last_name, password FROM Person WHERE email = ?";
-    private static final String SQL = "SELECT first_name, last_name FROM Person WHERE id = ?";
+public class PersonDao implements Dao<Person, Integer> {
+    private static final String SQL1 = "SELECT id, first_name, last_name, password FROM Person WHERE email = ?";
+    private static final String SQL = "SELECT id, first_name, last_name FROM Person WHERE id = ?";
     private ConnectionPool connectionPool;
 
     @Override
@@ -22,10 +22,10 @@ public class PersonDao implements Dao<Person, Long> {
     }
 
     @Override
-    public Optional<Person> getEntity(Long id) {
+    public Optional<Person> getEntity(Integer id) {
         try (Connection con = connectionPool.get();
              PreparedStatement prepStat = con.prepareStatement(SQL)) {
-            prepStat.setInt(1, id.intValue());
+            prepStat.setInt(1, id);
             try (ResultSet rs = prepStat.executeQuery()) {
                 return rs.next() ? readPerson(rs) : Optional.empty();
             }
@@ -54,7 +54,7 @@ public class PersonDao implements Dao<Person, Long> {
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(Integer id) {
 
     }
 
@@ -67,6 +67,7 @@ public class PersonDao implements Dao<Person, Long> {
         return Optional.ofNullable(Person.builder()
                 .firstName(rs.getString("first_name"))
                 .lastName(rs.getString("last_name"))
+                .id(rs.getInt("id"))
                 .build());
 
     }

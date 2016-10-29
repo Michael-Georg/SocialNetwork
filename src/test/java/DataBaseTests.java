@@ -18,7 +18,7 @@ public class DataBaseTests {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("SELECT id, first_name, last_name FROM Person")){
             while(rs.next()) {
-                System.out.println(builder.id(rs.getLong("id"))
+                System.out.println(builder.id(rs.getInt("id"))
                         .firstName(rs.getString("first_name"))
                         .lastName(rs.getString("last_name"))
                         .build());
