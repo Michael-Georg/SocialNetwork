@@ -3,16 +3,14 @@
 <html>
 <head>
     <title>Profile</title>
-    <style type="text/css">
-        <%@ include file="/css/styles.css" %>
-    </style>
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
 </head>
 <body>
 <div id="wrapper">
     <jsp:include page="/WEB-INF/header.jsp"/>
-<aside>
-    <jsp:include page="/WEB-INF/sidebar.jsp"/>
-</aside>
+    <aside>
+        <jsp:include page="/WEB-INF/sidebar.jsp"/>
+    </aside>
     <section>
         <jsp:useBean id="user" scope="request" type="models.Person"/>
         ${user.firstName}

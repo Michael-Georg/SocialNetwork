@@ -5,9 +5,6 @@
 <head>
     <meta charset="UTF-8">
     <title>login</title>
-    <%--<style type="text/css">--%>
-    <%--<%@ include file="/css/styles.css" %>--%>
-    <%--</style>--%>
     <link rel="stylesheet" href="/css/styles.css" type="text/css">
     <fmt:setLocale value="${sessionScope.lang}"/>
     <fmt:setBundle basename="localization.message" var="loc"/>
@@ -19,18 +16,24 @@
 </head>
 <body>
 <div id="wrapper">
-    <form name="login" method="post" action="Login">
-        <input class="reg" name="username" title="Login" placeholder="${mail}"/>
-        <input class="reg" placeholder="${password}" type="password" name="password" autocomplete="off"
-               title="Password"/>
-        <button type="submit">${signIn}</button>
-    </form>
-    <h1>
-        <c:if test='${requestScope.containsKey("error")}'>
-            ${errMsg}
-        </c:if>
-    </h1>
-    <a href="/Login">${registration}</a>
+    <header>
+        <%--<a href="/location">${sessionScope.lang}</a>--%>
+    </header>
+
+        <form name="login" method="post" action="Login">
+            <input class="reg" name="email" title="Login" placeholder="${mail}"/>
+            <input class="reg" placeholder="${password}" type="password" name="password" autocomplete="off"
+                   title="Password"/>
+            <button type="submit">${signIn}</button>
+        </form>
+
+            <c:if test='${requestScope.containsKey("error")}'>
+                ${errMsg}
+            </c:if>
+
+        <h1>
+            <a href="/SignUp">${registration}</a>
+        </h1>
 </div>
 
 </body>

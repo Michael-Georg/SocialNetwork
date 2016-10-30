@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 @Log
-@WebServlet("/location")
+@WebServlet("/Location")
 public class Localization extends HttpServlet {
 
     @Override
@@ -22,8 +22,10 @@ public class Localization extends HttpServlet {
         if (lang.isPresent())
             session.setAttribute("lang",
                     lang.get().equals("ru") ? "en" : "ru");
-        log.info(() -> session.getAttribute("URL").toString());
-        resp.sendRedirect(session.getAttribute("URL").toString());
+
+        String url = (String) Optional.ofNullable(session.getAttribute("URL")).orElse("/Login");
+        log.info(() -> url);
+        resp.sendRedirect(url);
     }
 
 }

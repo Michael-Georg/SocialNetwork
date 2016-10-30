@@ -19,7 +19,7 @@ public class SecurityFilter extends HttpFilter {
 
     @Override
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-        HttpSession session = request.getSession(true);
+        HttpSession session = request.getSession();
         log.info(request::getRequestURI);
         if (session.getAttribute(PERSON) != null)
             chain.doFilter(request, response);

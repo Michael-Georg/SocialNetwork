@@ -15,7 +15,7 @@ public class Person {
     private final String lastName;
     private final LocalDate dob;
     private final String email;
-//    private final String password;
+    private final String password;
     private final String address;
     private final String telephone;
 }
