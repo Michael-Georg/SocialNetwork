@@ -6,15 +6,7 @@ body {
     margin: 0;
 }
 
-input[name="username"] {
-    background-color: #f3f3f3;
-    border: 1px solid #e7e7e7;
-    height: 30px;
-    color: #b2b2b2;
-    padding: 0 10px;
-    vertical-align: top;
-}
-input[name="password"] {
+.reg {
     background-color: #f3f3f3;
     border: 1px solid #e7e7e7;
     height: 30px;
@@ -24,15 +16,14 @@ input[name="password"] {
 }
 
 form[name="login"] {
-    width: 280px;
-    height: 300px;
+    width: 200px;
 }
 
 button {
     color: #fff;
     background-color: #29c5e6;
     border: none;
-    height: 32px;
+    height: 30px;
     font-family: 'Oswald', sans-serif;
 }
 

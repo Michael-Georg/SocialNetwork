@@ -14,7 +14,7 @@ import java.io.IOException;
 import static servlets.ServletConst.PERSON;
 
 @Log
-@WebFilter("/*")
+@WebFilter({"/", "/Profile/*"})
 public class SecurityFilter extends HttpFilter {
 
     @Override
@@ -23,7 +23,8 @@ public class SecurityFilter extends HttpFilter {
         log.info(request::getRequestURI);
         if (session.getAttribute(PERSON) != null)
             chain.doFilter(request, response);
-        else
-            request.getRequestDispatcher("Login").forward(request, response);
+        else {
+            response.sendRedirect("/Login");
+        }
     }
 }

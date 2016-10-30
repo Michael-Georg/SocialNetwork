@@ -21,23 +21,23 @@ public class Login extends ServletWrapper {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        log.info(() -> "Login doGet");
+        req.getSession(true).setAttribute("lang", "ru");
         req.getRequestDispatcher("/auth/login.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        log.info(() -> "Login");
-        HttpSession session = req.getSession(true);
+        log.info(() -> "Login doPost");
+        HttpSession session = req.getSession();
         Map<String, String[]> map = req.getParameterMap();
-
         Optional<Person> person = personDao.isRegistered(map.get("username")[0], map.get("password")[0]);
         if (person.isPresent()) {
             session.setAttribute(PERSON, person.get());
-            session.setAttribute("lang", "en");
             log.info("/Profile/" + person.get().getId());
             resp.sendRedirect("/Profile/" + person.get().getId());
         } else {
-            req.setAttribute("errorMsg", "TRY AGAIN");
+            req.setAttribute("error", "err");
             req.getRequestDispatcher("/auth/login.jsp").forward(req, resp);
         }
     }

@@ -5,7 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <title>sidebar</title>
-    <link rel="stylesheet" href="/css/styles.css" type="text/css"/>
+    <style type="text/css">
+        <%@ include file="/css/styles.css" %>
+    </style>
     <fmt:setLocale value="${sessionScope.lang}" />
     <fmt:setBundle basename="localization.message" var="loc" />
     <fmt:message bundle="${loc}" key="friends" var="friends" />
@@ -13,7 +15,6 @@
     <fmt:message bundle="${loc}" key="music" var="music" />
 </head>
 <body>
-<aside>
     <p><img src="${pageContext.request.contextPath}/images/ALF.jpg" width="300" height="200" alt=""/></p>
     <nav>
         <ul class="aside-menu">
@@ -22,6 +23,5 @@
             <li><a href="${pageContext.request.contextPath}/Profile">${music}</a></li>
         </ul>
     </nav>
-</aside>
 </body>
 </html>

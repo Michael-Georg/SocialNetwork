@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>header</title>
-    <link rel="stylesheet" href="/css/styles.css" type="text/css"/>
+    <style type="text/css">
+        <%@ include file="/css/styles.css" %>
+    </style>
 
 </head>
 <body>
