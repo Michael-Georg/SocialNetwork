@@ -13,7 +13,7 @@ INSERT INTO Person (first_name, last_name, dob, email, password, address, teleph
 VALUES ('Alf', 'Alf', '1980-06-15', 'ALF', '', 'Franco square, 5/1, 10',
         '+38007654321');
 INSERT INTO Person (first_name, last_name, dob, email, password, address, telephone)
-VALUES ('John', 'Eglesias', '1980-06-15', 'John_Eglesias@mail.es', 'qwerty', 'Franco square, 5/1, 10',
+VALUES ('John', 'Eglesias', '1980-06-15', 'JohnEglesias@mail.es', 'qwerty', 'Franco square, 5/1, 10',
         '+38007654321');
 INSERT INTO Person (first_name, last_name, dob, email, password, address, telephone)
 VALUES ('Pit', 'Eglesias', '1980-06-15', 'Pit_Eglesias@mail.es', 'qwerty', 'Franco square, 5/1, 10',

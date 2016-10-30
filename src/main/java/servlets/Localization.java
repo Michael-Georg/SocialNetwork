@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
 
+import static servlets.ServletConst.URL;
+
 @Log
 @WebServlet("/Location")
 public class Localization extends HttpServlet {
@@ -23,7 +25,7 @@ public class Localization extends HttpServlet {
             session.setAttribute("lang",
                     lang.get().equals("ru") ? "en" : "ru");
 
-        String url = (String) Optional.ofNullable(session.getAttribute("URL")).orElse("/Login");
+        String url = (String) Optional.ofNullable(session.getAttribute(URL)).orElse("/");
         log.info(() -> url);
         resp.sendRedirect(url);
     }

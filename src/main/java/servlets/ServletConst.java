@@ -8,4 +8,5 @@ public interface ServletConst {
     String pathToInit = "WEB-INF/classes/init.sql";
     String ERROR = "error";
     String LANG = "lang";
+    String URL = "url";
 }

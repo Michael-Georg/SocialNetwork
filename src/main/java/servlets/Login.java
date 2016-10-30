@@ -22,6 +22,7 @@ public class Login extends ServletWrapper {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         log.info(() -> "Login doGet");
         HttpSession session = req.getSession(true);
+        session.setAttribute(URL, "/Login");
         if (session.getAttribute(LANG) == null)
             req.getSession(true).setAttribute(LANG, "en");
         req.getRequestDispatcher("/auth/login.jsp").forward(req, resp);

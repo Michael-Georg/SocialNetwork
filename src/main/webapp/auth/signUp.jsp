@@ -16,6 +16,9 @@
 </head>
 <body>
 <div id="wrapper">
+    <header>
+        <a href="/Location">${sessionScope.lang}</a>
+    </header>
     <h1>${registration}</h1>
     <form name="signUp" action="SignUp" method="post">
         <section class="part one">

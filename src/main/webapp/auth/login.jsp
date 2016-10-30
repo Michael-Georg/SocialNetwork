@@ -17,7 +17,7 @@
 <body>
 <div id="wrapper">
     <header>
-        <%--<a href="/location">${sessionScope.lang}</a>--%>
+        <a href="/Location">${sessionScope.lang}</a>
     </header>
 
         <form name="login" method="post" action="Login">

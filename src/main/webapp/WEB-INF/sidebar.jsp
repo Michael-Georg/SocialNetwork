@@ -12,7 +12,7 @@
     <fmt:message bundle="${loc}" key="music" var="music" />
 </head>
 <body>
-    <p><img src="/WEB-INF/images/ALF.jpg" width="300" height="200"/></p>
+    <p><img src="/images/ALF.jpg" width="300" height="200"/></p>
     <nav>
         <ul class="aside-menu">
             <li><a href="${pageContext.request.contextPath}/Profile">${friends}</a></li>

@@ -40,7 +40,7 @@ public class Profile extends ServletWrapper {
                 .getEntity(Integer.parseInt(m.group(1)));
         if (user.isPresent()) {
             req.setAttribute(USER, user.get());
-            session.setAttribute("URL", url);
+            session.setAttribute(URL, url);
             req.getRequestDispatcher("/user/profile.jsp").forward(req, resp);
         } else {
             resp.sendRedirect("/auth/error/");
