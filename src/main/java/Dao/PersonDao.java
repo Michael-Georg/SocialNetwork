@@ -86,7 +86,7 @@ public class PersonDao implements Dao<Person, Integer> {
 
     }
 
-    public Optional<Person> readPerson(ResultSet rs) throws SQLException {
+    private Optional<Person> readPerson(ResultSet rs) throws SQLException {
         return Optional.ofNullable(Person.builder()
                 .firstName(rs.getString("first_name"))
                 .lastName(rs.getString("last_name"))

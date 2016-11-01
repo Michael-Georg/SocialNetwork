@@ -19,7 +19,7 @@ public class Localization extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
+        HttpSession session = req.getSession(true);
         Optional<String> lang = Optional.ofNullable(session.getAttribute("lang").toString());
         if (lang.isPresent())
             session.setAttribute("lang",
