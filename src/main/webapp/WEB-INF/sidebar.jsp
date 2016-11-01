@@ -15,7 +15,7 @@
     <p><img src="/images/ALF.jpg" width="300" height="200"/></p>
     <nav>
         <ul class="aside-menu">
-            <li><a href="${pageContext.request.contextPath}/Profile">${friends}</a></li>
+            <li><a href="${pageContext.request.contextPath}/Friends">${friends}</a></li>
             <li><a href="${pageContext.request.contextPath}/Profile">${messages}</a></li>
             <li><a href="${pageContext.request.contextPath}/Profile">${music}</a></li>
         </ul>

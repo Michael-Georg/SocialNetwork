@@ -10,10 +10,9 @@ CREATE TABLE Person (
 );
 
 CREATE TABLE Friends(
-  id_user INT NOT NULL,
-  id_friend INT NOT NULL,
-  FOREIGN KEY (id_user, id_friend) REFERENCES Person(id),
-  UNIQUE (id_user, id_friend)
+  id_user INT NOT NULL REFERENCES  Person(id),
+  id_friend INT NOT NULL REFERENCES Person(id),
+  PRIMARY KEY (id_user, id_friend)
 );
 
 INSERT INTO Person (first_name, last_name, dob, email, password, address, telephone)

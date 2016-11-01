@@ -1,6 +1,5 @@
 package Dao;
 
-import lombok.AllArgsConstructor;
 import models.Person;
 
 import java.sql.Connection;
@@ -10,12 +9,15 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
 public class PersonDao implements Dao<Person, Integer> {
     private static final String SQL = "SELECT id, first_name, last_name, email FROM Person WHERE id = ?";
     private static final String SQL1 = "SELECT id, first_name, last_name, email, password FROM Person WHERE email = ?";
     private static final String SQL2 = "INSERT INTO Person (first_name, last_name, email, password) VALUES (?, ?, ?, ?)";
     private ConnectionPool connectionPool;
+
+    public PersonDao(ConnectionPool connectionPool) {
+        this.connectionPool = connectionPool;
+    }
 
     @Override
     public List<Person> getAll() {

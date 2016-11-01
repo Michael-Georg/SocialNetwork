@@ -1,6 +1,7 @@
 package servlets.listeners;
 
 import Dao.ConnectionPool;
+import Dao.FriendsDao;
 import Dao.PersonDao;
 import lombok.extern.java.Log;
 import org.h2.Driver;
@@ -33,6 +34,8 @@ public class Init implements ServletContextListener {
         String realPath = context.getRealPath("/");
         connectionPool = ConnectionPool.create(realPath + config);
         initDb(connectionPool, realPath + pathToInit);
+
+        context.setAttribute(FRIENDS_DAO, new FriendsDao(connectionPool));
         context.setAttribute(PERSON_DAO, new PersonDao(connectionPool));
     }
 

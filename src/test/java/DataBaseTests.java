@@ -1,4 +1,5 @@
 import Dao.ConnectionPool;
+import Dao.FriendsDao;
 import Dao.PersonDao;
 import models.Person;
 import org.junit.BeforeClass;
@@ -16,6 +17,7 @@ import static org.hamcrest.core.Is.is;
 public class DataBaseTests {
     private static ConnectionPool pool;
     private static PersonDao personDao;
+    private static FriendsDao friendsDao;
 
     @BeforeClass
     public static void init() throws Exception {
@@ -23,6 +25,7 @@ public class DataBaseTests {
         Init init = new Init();
         init.initDb(pool, "src\\main\\resources\\init.sql");
         personDao = new PersonDao(pool);
+        friendsDao = new FriendsDao(pool);
     }
 
     @Test
@@ -51,5 +54,21 @@ public class DataBaseTests {
                 .build());
         Person person = personDao.getByEmail("Alex@Alex.com").get();
         assertThat(person.getEmail(), is(equalTo(email)));
+    }
+
+    @Test
+    public void printAllFriendsPair() throws Exception {
+        try(Connection con = pool.get();
+        Statement st = con.createStatement();
+        ResultSet rs = st.executeQuery("SELECT * FROM Friends")){
+            while (rs.next())
+                System.out.println(rs.getInt("id_user") + " + " + rs.getInt("id_friend"));
+        }
+    }
+
+    @Test
+    public void printAllFriends() throws Exception {
+        System.out.println(friendsDao.getAll(1).size());
+
     }
 }
