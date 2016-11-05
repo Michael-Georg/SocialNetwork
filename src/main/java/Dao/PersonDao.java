@@ -54,10 +54,10 @@ public class PersonDao implements Dao<Person, Integer> {
              PreparedStatement prepStat = con.prepareStatement(SQL1)) {
             prepStat.setString(1, email);
             try (ResultSet rs = prepStat.executeQuery()) {
-                rs.next();
-                if (rs.getString("password").equals(pass))
+                if (rs.next() && rs.getString("password").equals(pass))
                     return readPerson(rs);
                 else return Optional.empty();
+
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -69,11 +69,11 @@ public class PersonDao implements Dao<Person, Integer> {
     public void create(Person entity) {
         try (Connection con = connectionPool.get();
              PreparedStatement ps = con.prepareStatement(SQL2)) {
-                ps.setString(1, entity.getFirstName());
-                ps.setString(2, entity.getLastName());
-                ps.setString(3, entity.getEmail());
-                ps.setString(4, entity.getPassword());
-                ps.executeUpdate();
+            ps.setString(1, entity.getFirstName());
+            ps.setString(2, entity.getLastName());
+            ps.setString(3, entity.getEmail());
+            ps.setString(4, entity.getPassword());
+            ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException();
         }

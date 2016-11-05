@@ -15,7 +15,7 @@
         <jsp:useBean id="user" scope="request" type="models.Person"/>
         ${user.firstName}
         ${user.lastName}
-
+        <a href="/Upload">UPLOAD </a>
     </section>
 </div>
 </body>

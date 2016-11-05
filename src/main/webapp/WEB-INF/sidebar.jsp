@@ -10,14 +10,16 @@
     <fmt:message bundle="${loc}" key="friends" var="friends" />
     <fmt:message bundle="${loc}" key="messages" var="messages" />
     <fmt:message bundle="${loc}" key="music" var="music" />
+    <fmt:message bundle="${loc}" key="signOut" var="signOut"/>
 </head>
 <body>
-    <p><img src="/images/ALF.jpg" width="300" height="200"/></p>
+    <p><img class="img_circle" src="/images/${person.id}.jpg"/></p>
     <nav>
         <ul class="aside-menu">
             <li><a href="${pageContext.request.contextPath}/Friends">${friends}</a></li>
             <li><a href="${pageContext.request.contextPath}/Profile">${messages}</a></li>
             <li><a href="${pageContext.request.contextPath}/Profile">${music}</a></li>
+            <li><a href="/SignOut">${signOut}</a></li>
         </ul>
     </nav>
 </body>

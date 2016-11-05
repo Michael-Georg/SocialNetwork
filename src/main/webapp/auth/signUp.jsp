@@ -17,27 +17,31 @@
 <body>
 <div id="wrapper">
     <header>
-        <a href="/Location">${sessionScope.lang}</a>
+        <div class="lang">
+            <a href="/Location">${sessionScope.lang}</a>
+        </div>
     </header>
-    <h1>${registration}</h1>
-    <form name="signUp" action="SignUp" method="post">
-        <section class="part one">
-            <p><label for="firstName">${firstName}</label>
-                <input id="firstName" name="firstName" pattern="[A-Za-zА-Яа-я]{2,}" required><span>123</span></p>
-
-            <p><label for="lastName">${lastName}</label>
-                <input id="lastName" name="lastName" pattern="[A-Za-zА-Яа-я]{2,}" required></p>
-
-            <p><label for="email">${mail}</label>
-                <input id="email" name="email" pattern="[\w-\.]+@(\w+\.)+[A-Za-z]{2,4}" required></p>
-
-            <p><label for="password">Пароль</label>
-                <input id="password" type="password" name="password" autocomplete="off" required/>
-        </section>
-
-        <section class="part two">
+    <form class="form-signup" name="signUp" action="SignUp" method="post">
+        <h1>${registration}</h1>
+        <div>
+            <label for="firstName">${firstName}</label>
+            <input class="reg" id="firstName" name="firstName" pattern="[A-Za-zА-Яа-я]{2,}" required>
+        </div>
+        <div>
+            <label for="lastName">${lastName}</label>
+            <input class="reg" id="lastName" name="lastName" pattern="[A-Za-zА-Яа-я]{2,}" required>
+        </div>
+        <div>
+            <label for="email">${mail}</label>
+            <input class="reg" id="email" name="email" pattern="[\w-\.]+@(\w+\.)+[A-Za-z]{2,4}" required>
+        </div>
+        <div>
+            <label for="password">${password}</label>
+            <input class="reg" id="password" type="password" name="password" autocomplete="off" required/>
+        </div>
+        <div>
             <button type="submit">${signUp}</button>
-        </section>
+        </div>
     </form>
 </div>
 </body>

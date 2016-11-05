@@ -5,16 +5,16 @@
 <head>
     <title>header</title>
     <link rel="stylesheet" href="/css/styles.css" type="text/css">
-    <fmt:setLocale value="${sessionScope.lang}"/>
-    <fmt:setBundle basename="localization.message" var="loc"/>
-    <fmt:message bundle="${loc}" key="signOut" var="signOut"/>
 
 </head>
 <body>
 <header>
-    <a href="/Location">${sessionScope.lang}</a>
-    <a href="/SignOut">${signOut}</a>
-    <h1>${person.firstName} ${person.lastName}</h1>
+    <div class="lang">
+        <a href="/Location">${sessionScope.lang}</a>
+    </div>
+    <div class="fio">
+        ${person.firstName} ${person.lastName}
+    </div>
 </header>
 
 </body>

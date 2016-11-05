@@ -37,14 +37,17 @@ public class Login extends ServletWrapper {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         log.info(() -> "Login doPost");
         HttpSession session = req.getSession();
-        Optional<Person> person = personDao.getByEmailAndPass(req.getParameter("email"), req.getParameter("password"));
-        if (person.isPresent()) {
-            session.setAttribute(PERSON, person.get());
-            resp.sendRedirect("/Profile/" + person.get().getId());
-        } else {
-            req.setAttribute(ERROR, "err");
-            req.getRequestDispatcher("/auth/login.jsp").forward(req, resp);
-        }
+        String email = req.getParameter("email");
+        String password = req.getParameter("password");
+//        if (email != "" && password != "") {
+            Optional<Person> person = personDao.getByEmailAndPass(email, password);
+            if (person.isPresent()) {
+                session.setAttribute(PERSON, person.get());
+                resp.sendRedirect("/Profile/" + person.get().getId());
+                return;
+            }
+//        }
+        req.setAttribute(ERROR, "err");
+        req.getRequestDispatcher("/auth/login.jsp").forward(req, resp);
     }
-
 }

@@ -13,6 +13,11 @@
 <body>
 <div id="wrapper">
     <jsp:include page="/WEB-INF/header.jsp"/>
+    <aside>
+        <jsp:include page="/WEB-INF/sidebar.jsp"/>
+    </aside>
+    <section>
+
     <table>
         <c:forEach var="user" items="${friends}">
             <tr>
@@ -20,6 +25,7 @@
             </tr>
         </c:forEach>
     </table>
+    </section>
 </div>
 
 
