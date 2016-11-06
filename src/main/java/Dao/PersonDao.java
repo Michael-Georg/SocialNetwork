@@ -10,8 +10,10 @@ import java.util.List;
 import java.util.Optional;
 
 public class PersonDao implements Dao<Person, Integer> {
-    private static final String SQL = "SELECT id, first_name, last_name, email FROM Person WHERE id = ?";
-    private static final String SQL1 = "SELECT id, first_name, last_name, email, password FROM Person WHERE email = ?";
+    private static final String SQL = "SELECT id, first_name, last_name, email," +
+            " dob, address, telephone FROM Person WHERE id = ?";
+    private static final String SQL1 = "SELECT id, first_name, last_name, email, password," +
+            "dob, address, telephone FROM Person WHERE email = ?";
     private static final String SQL2 = "INSERT INTO Person (first_name, last_name, email, password) VALUES (?, ?, ?, ?)";
     private ConnectionPool connectionPool;
 
@@ -93,6 +95,9 @@ public class PersonDao implements Dao<Person, Integer> {
                 .firstName(rs.getString("first_name"))
                 .lastName(rs.getString("last_name"))
                 .email(rs.getString("email"))
+                .dob(rs.getDate("dob").toLocalDate())
+                .address(rs.getString("address"))
+                .telephone(rs.getString("telephone"))
                 .id(rs.getInt("id"))
                 .build());
 

@@ -40,7 +40,7 @@
             <input class="reg" id="password" type="password" name="password" autocomplete="off" required/>
         </div>
         <div>
-            <button type="submit">${signUp}</button>
+            <button class="reg_button" type="submit">${signUp}</button>
         </div>
     </form>
 </div>

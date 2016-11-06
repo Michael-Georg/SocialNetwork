@@ -37,6 +37,8 @@ public class Upload extends ServletWrapper{
         log.info(fileName);
 
         filePart.write(fileName);
+
         resp.sendRedirect("/Profile/" + id);
+
     }
 }
