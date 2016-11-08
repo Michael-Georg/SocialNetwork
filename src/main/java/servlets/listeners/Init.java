@@ -26,7 +26,6 @@ import static servlets.ServletConst.*;
 @Log
 @WebListener
 public class Init implements ServletContextListener {
-
     private static ConnectionPool connectionPool;
     @Override
     public void contextInitialized(ServletContextEvent sce) {
@@ -34,6 +33,7 @@ public class Init implements ServletContextListener {
         String realPath = context.getRealPath("/");
         connectionPool = ConnectionPool.create(realPath + config);
         initDb(connectionPool, realPath + pathToInit);
+
 
         context.setAttribute(FRIENDS_DAO, new FriendsDao(connectionPool));
         context.setAttribute(PERSON_DAO, new PersonDao(connectionPool));

@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 @Getter
 @ToString
@@ -13,7 +13,7 @@ public class Person {
     private final Integer id;
     private final String firstName;
     private final String lastName;
-    private final LocalDate dob;
+    private final Date dob;
     private final String email;
     private final String password;
     private final String address;

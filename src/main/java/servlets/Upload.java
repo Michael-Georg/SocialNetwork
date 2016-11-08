@@ -10,9 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import static servlets.ServletConst.PERSON;
 
@@ -31,12 +28,8 @@ public class Upload extends ServletWrapper{
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Part filePart = req.getPart("file");
         int id = ((Person) req.getSession().getAttribute(PERSON)).getId();
-        String fileName = getServletContext().getRealPath("/") + "/images/" +id + ".jpg";
-        Path path = Paths.get(fileName);
-        Files.deleteIfExists(path);
-        log.info(fileName);
-
-        filePart.write(fileName);
+        log.info("/content/");
+        filePart.write(getServletContext().getRealPath("/images/") + id + ".jpg" );
 
         resp.sendRedirect("/Profile/" + id);
 

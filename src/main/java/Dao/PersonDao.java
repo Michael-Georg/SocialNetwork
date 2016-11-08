@@ -95,7 +95,7 @@ public class PersonDao implements Dao<Person, Integer> {
                 .firstName(rs.getString("first_name"))
                 .lastName(rs.getString("last_name"))
                 .email(rs.getString("email"))
-                .dob(rs.getDate("dob").toLocalDate())
+                .dob(rs.getDate("dob"))
                 .address(rs.getString("address"))
                 .telephone(rs.getString("telephone"))
                 .id(rs.getInt("id"))

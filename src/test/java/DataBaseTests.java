@@ -69,6 +69,5 @@ public class DataBaseTests {
     @Test
     public void printAllFriends() throws Exception {
         System.out.println(friendsDao.getAll(1).size());
-
     }
 }

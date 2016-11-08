@@ -14,8 +14,6 @@
     <fmt:message bundle="${loc}" key="email" var="mail"/>
     <fmt:message bundle="${loc}" key="telephone" var="telephone"/>
     <fmt:message bundle="${loc}" key="address" var="address"/>
-    <fmt:message bundle="${loc}" key="errMsg" var="errMsg"/>
-
 </head>
 <body>
 <div id="wrapper">
@@ -28,9 +26,10 @@
                     <div class="page_block">
                         <div class="avatar_wrap">
                             <div>
-                                <img class="page_avatar" src="/images/${user.id}.jpg"/>
+                                <img class="page_avatar"
+                                     src='/images/${user.id}.jpg'/>
                             </div>
-                            <form class="only_button" action="/Upload">
+                            <form class="only_button" action="/Upload" method="get">
                                 <button class="avatar_button" type="submit">Upload</button>
                             </form>
                         </div>
