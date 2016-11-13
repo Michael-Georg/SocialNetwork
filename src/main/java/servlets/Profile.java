@@ -28,7 +28,6 @@ public class Profile extends ServletWrapper {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         String url = req.getRequestURI();
-        log.info(url);
 
         Pattern p = Pattern.compile("/?Profile/(\\d+)");
         Matcher m = p.matcher(url.trim());
@@ -41,12 +40,13 @@ public class Profile extends ServletWrapper {
         if (user.isPresent()) {
             req.setAttribute(USER, user.get());
             session.setAttribute(URL, url);
+            int person_id = ((Person)session.getAttribute(PERSON)).getId();
+            int user_id = user.get().getId();
+        log.info("person id - " + person_id + "requested id - " + user_id);
+            req.setAttribute(FRIEND_STATUS, friendsDao.friendStatus(person_id, user_id));
             req.getRequestDispatcher("/user/profile.jsp").forward(req, resp);
         } else {
             resp.sendRedirect("/auth/error/");
-//            Object person = session.getAttribute(PERSON);
-//            req.setAttribute(USER, person);
-//            url = "/Profile/" + ((Person) person).getId();
         }
 
     }

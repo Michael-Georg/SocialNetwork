@@ -5,7 +5,7 @@
 <html>
     <head>
         <title>sidebar</title>
-        <link rel="stylesheet" href="/css/styles.css" type="text/css">
+        <%--<link rel="stylesheet" href="/css/styles.css" type="text/css">--%>
         <fmt:setLocale value="${sessionScope.lang}"/>
         <fmt:setBundle basename="localization.message" var="loc"/>
         <fmt:message bundle="${loc}" key="friends" var="friends"/>
@@ -30,6 +30,9 @@
                             </li>
                             <li>
                                 <a href="${pageContext.request.contextPath}/Profile">${music}</a>
+                            </li>
+                            <li>
+                                <a href="${pageContext.request.contextPath}/Settings">Редактировать профиль</a>
                             </li>
                             <li>
                                 <a href="/SignOut">${signOut}</a>

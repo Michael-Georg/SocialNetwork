@@ -20,6 +20,7 @@ public class Friends extends ServletWrapper {
         HttpSession session = req.getSession();
         Person person = (Person) session.getAttribute(PERSON);
         req.setAttribute(FRIENDS, friendsDao.getAll(person.getId()));
+        session.setAttribute(URL, "/Friends");
         req.getRequestDispatcher("/user/friends.jsp").forward(req, resp);
     }
 }

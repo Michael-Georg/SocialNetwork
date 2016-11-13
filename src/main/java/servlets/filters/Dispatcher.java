@@ -7,9 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static servlets.ServletConst.URL;
 
@@ -18,15 +17,12 @@ import static servlets.ServletConst.URL;
 public class Dispatcher extends HttpFilter {
     @Override
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
+        HttpSession session =  request.getSession(true);
         String url = request.getRequestURI();
-        log.info(url);
-
-        Pattern p = Pattern.compile("/?Profile/(\\d+)");
-        Matcher m = p.matcher(url);
-        url = m.matches() ? url : "/";
-        request.getSession(true).setAttribute(URL, url);
-        chain.doFilter(request, response);
-
+        if  (!url.contains("Location"))
+            session.setAttribute(URL, url);
+    log.info("requested URL: " + url);
+    chain.doFilter(request, response);
     }
 }
 

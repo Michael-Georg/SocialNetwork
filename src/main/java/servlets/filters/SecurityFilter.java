@@ -14,7 +14,7 @@ import java.io.IOException;
 import static servlets.ServletConst.PERSON;
 
 @Log
-@WebFilter({"/", "/Profile/*"})
+@WebFilter({"/", "/Profile/*", "/Settings", "/Friends", "/Upload"})
 public class SecurityFilter extends HttpFilter {
 
     @Override

@@ -15,17 +15,49 @@ public class FriendsDao {
     private ConnectionPool connectionPool;
     private String SQL = "SELECT first_name, last_name, id FROM Person WHERE id IN " +
             "(SELECT id_friend FROM Friends WHERE id_user = ?)";
+    private String SQL1 = "DELETE FROM Friends WHERE id_user = ? AND id_friend =?";
+    private String SQL2 = "INSERT INTO Friends (id_user, id_friend) VALUES (?, ?)";
+    private String SQL3 = "SELECT * FROM Friends WHERE id_user = ? AND id_friend =?";
 
     public FriendsDao(ConnectionPool connectionPool) {
         this.connectionPool = connectionPool;
     }
 
-    public void addFriend(int myId, int friendId){
+    public void add(int userId, int friendId){
+        try(Connection con = connectionPool.get();
+            PreparedStatement ps = con.prepareStatement(SQL2)){
+            ps.setInt(1, userId);
+            ps.setInt(2, friendId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 
-    public void removeFriend(int friendId){
+    public void remove(int userId, int friendId){
+        try(Connection con = connectionPool.get();
+        PreparedStatement ps = con.prepareStatement(SQL1)){
+            ps.setInt(1, userId);
+            ps.setInt(2, friendId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
+
+    public int friendStatus(int userId, int friendId){
+        try(Connection con = connectionPool.get();
+            PreparedStatement ps = con.prepareStatement(SQL3)){
+            ps.setInt(1, userId);
+            ps.setInt(2, friendId);
+            try(ResultSet rs = ps.executeQuery()){
+                return rs.next() ? 1 : 0;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public List<Person> getAll(int myId){
@@ -43,13 +75,13 @@ public class FriendsDao {
         }
     }
 
+
     private Optional<Person> readPerson(ResultSet rs) throws SQLException {
         return Optional.ofNullable(Person.builder()
                 .firstName(rs.getString("first_name"))
                 .lastName(rs.getString("last_name"))
                 .id(rs.getInt("id"))
                 .build());
-
     }
 
 }

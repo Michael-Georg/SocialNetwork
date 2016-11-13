@@ -9,6 +9,7 @@ import servlets.listeners.Init;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDate;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -58,16 +59,46 @@ public class DataBaseTests {
 
     @Test
     public void printAllFriendsPair() throws Exception {
-        try(Connection con = pool.get();
-        Statement st = con.createStatement();
-        ResultSet rs = st.executeQuery("SELECT * FROM Friends")){
+        try (Connection con = pool.get();
+             Statement st = con.createStatement();
+             ResultSet rs = st.executeQuery("SELECT * FROM Friends")) {
             while (rs.next())
                 System.out.println(rs.getInt("id_user") + " + " + rs.getInt("id_friend"));
         }
     }
 
     @Test
+    public void updateTest() throws Exception {
+        personDao.create(Person.builder()
+                .firstName("Mike")
+                .lastName("Mike")
+                .email("Mike@Mike.ru")
+                .password("123")
+                .build());
+
+        Person person = Person.builder()
+                .firstName("Mi")
+                .lastName("Mi")
+                .email("Mike@Mike.ru")
+                .dob(LocalDate.parse("2000-05-10"))
+                .password("111")
+                .build();
+        personDao.update(person);
+
+        System.out.println(personDao.getByEmail("Mike@Mike.ru"));
+    }
+
+    @Test
     public void printAllFriends() throws Exception {
         System.out.println(friendsDao.getAll(1).size());
+    }
+
+    @Test
+    public void addRemoveFriend() throws Exception {
+        friendsDao.add(3,4);
+       assertThat(friendsDao.getAll(3).get(0).getId(), is(4));
+        friendsDao.remove(3,4);
+        assertThat(friendsDao.getAll(3).size(), is(0));
+
     }
 }

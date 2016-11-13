@@ -22,25 +22,26 @@
             <a href="Location">${sessionScope.lang}</a>
         </div>
     </header>
-    <form class="form-signin" name="login" method="post" action="/Login">
+    <div class="form-signin">
+        <form name="login" method="post" action="/Login">
 
-        <input id="email" class="reg" name="email" title="Login" placeholder="${mail}"/>
+            <input id="email" class="reg" name="email" title="Login" placeholder="${mail}"/>
 
-        <input class="reg" placeholder="${password}" type="password" name="password" autocomplete="off"
-               title="Password"/>
+            <input class="reg" placeholder="${password}" type="password" name="password" autocomplete="off"
+                   title="Password"/>
 
-        <div class="errmsg">
-            <c:if test='${requestScope.containsKey("error")}'>
-                ${errMsg}
-            </c:if>
-        </div>
-        <button class="reg_button" type="submit">${signIn}</button>
-        <div class="reglink">
-            <a href="SignUp">${signUp}</a>
-        </div>
-    </form>
+            <div class="errmsg">
+                <c:if test='${requestScope.containsKey("error")}'>
+                    ${errMsg}
+                </c:if>
+            </div>
+            <button class="reg_button" type="submit">${signIn}</button>
+            <div class="reglink">
+                <a href="SignUp">${signUp}</a>
+            </div>
+        </form>
 
-
+    </div>
 </div>
 </body>
 </html>

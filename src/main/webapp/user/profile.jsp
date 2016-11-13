@@ -29,57 +29,87 @@
                                 <img class="page_avatar"
                                      src='/images/${user.id}.jpg'/>
                             </div>
-                            <form class="only_button" action="/Upload" method="get">
-                                <button class="avatar_button" type="submit">Upload</button>
-                            </form>
+                            <c:if test="${person.id ne user.id}">
+                                <form class="only_button" action="/AddRemoveFriend" method="get">
+                                    <c:choose>
+                                        <c:when test="${requestScope.friendStatus eq 1}">
+                                            <button class="avatar_button" type="submit" name="status"
+                                                    value="${user.id}0">
+                                                remove
+                                            </button>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <button class="avatar_button" type="submit" name="status"
+                                                    value="${user.id}1">
+                                                add
+                                            </button>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </form>
+                            </c:if>
                         </div>
                     </div>
                 </div>
                 <div class="main_section">
-                    <div>
-                        <h2 class="page_name"> ${user.firstName} ${user.lastName}</h2>
-                    </div>
-                    <div class="profile_info">
-                        <c:if test="${not empty user.dob}">
-                            <div class="info_line">
-                                <div class="label fl_l">
-                                        ${dob}:
-                                </div>
-                                <div>
-                                        ${user.dob}
-                                </div>
+                    <div class="page_block fl_l">
+                        <div class="avatar_wrap">
+                            <div>
+                                <h2 class="page_name"> ${user.firstName} ${user.lastName}</h2>
                             </div>
-                        </c:if>
-                        <c:if test="${not empty user.telephone}">
-                            <div class="info_line">
-                                <div class="label fl_l">
-                                        ${telephone}:
-                                </div>
-                                <div>
-                                        ${user.telephone}
-                                </div>
+                            <div class="profile_info">
+                                <c:if test="${not empty user.dob}">
+                                    <div class="info_line">
+                                        <div class="label fl_l">
+                                                ${dob}:
+                                        </div>
+                                        <div>
+                                                ${user.dob}
+                                        </div>
+                                    </div>
+                                </c:if>
+                                <c:if test="${not empty user.telephone}">
+                                    <div class="info_line">
+                                        <div class="label fl_l">
+                                                ${telephone}:
+                                        </div>
+                                        <div>
+                                                ${user.telephone}
+                                        </div>
+                                    </div>
+                                </c:if>
+                                <c:if test="${not empty user.email}">
+                                    <div class="info_line">
+                                        <div class="label fl_l">
+                                                ${mail}:
+                                        </div>
+                                        <div>
+                                                ${user.email}
+                                        </div>
+                                    </div>
+                                </c:if>
+                                <c:if test="${not empty user.address}">
+                                    <div class="info_line">
+                                        <div class="label fl_l">
+                                                ${address}:
+                                        </div>
+                                        <div>
+                                                ${user.address}
+                                        </div>
+                                    </div>
+                                </c:if>
+                                <c:if test="${not empty user.info}">
+                                    <div class="info_line">
+                                        <div class="label fl_l">
+                                            info:
+                                        </div>
+                                        <div>
+                                                ${user.info}
+                                        </div>
+                                    </div>
+                                </c:if>
+
                             </div>
-                        </c:if>
-                        <c:if test="${not empty user.email}">
-                            <div class="info_line">
-                                <div class="label fl_l">
-                                        ${mail}:
-                                </div>
-                                <div>
-                                        ${user.email}
-                                </div>
-                            </div>
-                        </c:if>
-                        <c:if test="${not empty user.address}">
-                            <div class="info_line">
-                                <div class="label fl_l">
-                                        ${address}:
-                                </div>
-                                <div>
-                                        ${user.address}
-                                </div>
-                            </div>
-                        </c:if>
+                        </div>
                     </div>
                 </div>
             </div>

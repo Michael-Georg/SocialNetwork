@@ -11,24 +11,23 @@
     <fmt:setBundle basename="localization.message" var="loc"/>
 </head>
 <body>
+
 <div id="wrapper">
     <jsp:include page="/WEB-INF/header.jsp"/>
-    <aside>
+    <div class="page_layout">
         <jsp:include page="/WEB-INF/sidebar.jsp"/>
-    </aside>
-    <section>
+        <div class="fl_r">
+            <div class="page_body">
+                <div class="page_block">
+                    <c:forEach var="user" items="${friends}">
 
-    <table>
-        <c:forEach var="user" items="${friends}">
-            <tr>
-                <td><a href="/Profile/${user.id}"> ${user.firstName} ${user.lastName}</a></td>
-            </tr>
-        </c:forEach>
-    </table>
-    </section>
-</div>
-
-
+                        <div class="settings-line"><a href="/Profile/${user.id}"> ${user.firstName} ${user.lastName}</a>
+                        </div>
+                    </c:forEach>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

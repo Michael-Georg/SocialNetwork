@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Sign up</title>
@@ -23,24 +24,30 @@
     </header>
     <form class="form-signup" name="signUp" action="SignUp" method="post">
         <h1>${registration}</h1>
-        <div>
-            <label for="firstName">${firstName}</label>
-            <input class="reg" id="firstName" name="firstName" pattern="[A-Za-zА-Яа-я]{2,}" required>
+        <div class="settings-line">
+            <label class="settings-label" for="firstName">${firstName}</label>
+            <input class="settings-input" id="firstName" name="firstName" pattern="[A-Za-zА-Яа-я]{2,}" required>
+        </div>
+        <div class="settings-line">
+            <label class="settings-label" for="lastName">${lastName}</label>
+            <input class="settings-input" id="lastName" name="lastName" pattern="[A-Za-zА-Яа-я]{2,}" required>
+        </div>
+        <div class="settings-line">
+            <label class="settings-label" for="email">${mail}</label>
+            <input class="settings-input" id="email"
+                   name="email" pattern="[a-zA-Z0-9_\.\+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-\.]{2,}" required>
+        </div>
+        <div  class="settings-line">
+            <label class="settings-label" for="password">${password}</label>
+            <input class="settings-input" id="password" type="password" name="password" autocomplete="off" required/>
+        </div>
+        <div class="errmsg settings-line">
+            <c:if test='${requestScope.error eq "errEmail"}'>
+                Email already used
+            </c:if>
         </div>
         <div>
-            <label for="lastName">${lastName}</label>
-            <input class="reg" id="lastName" name="lastName" pattern="[A-Za-zА-Яа-я]{2,}" required>
-        </div>
-        <div>
-            <label for="email">${mail}</label>
-            <input class="reg" id="email" name="email" pattern="[\w-\.]+@(\w+\.)+[A-Za-z]{2,4}" required>
-        </div>
-        <div>
-            <label for="password">${password}</label>
-            <input class="reg" id="password" type="password" name="password" autocomplete="off" required/>
-        </div>
-        <div>
-            <button class="reg_button" type="submit">${signUp}</button>
+            <button class="setting-button" type="submit">${signUp}</button>
         </div>
     </form>
 </div>

@@ -2,6 +2,7 @@ package servlets;
 
 public interface ServletConst {
     String PERSON = "person";
+    String FRIEND_STATUS = "friendStatus";
     String FRIENDS = "friends";
     String USER = "user";
     String config = "WEB-INF/classes/db.properties";

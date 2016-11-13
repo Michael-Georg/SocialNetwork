@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>header</title>
-    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+    <%--<link rel="stylesheet" href="/css/styles.css" type="text/css">--%>
 
 </head>
 <body>

@@ -2,19 +2,18 @@ package Dao;
 
 import models.Person;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 import java.util.Optional;
 
 public class PersonDao implements Dao<Person, Integer> {
     private static final String SQL = "SELECT id, first_name, last_name, email," +
-            " dob, address, telephone FROM Person WHERE id = ?";
+            " dob, address, telephone, info FROM Person WHERE id = ?";
     private static final String SQL1 = "SELECT id, first_name, last_name, email, password," +
-            "dob, address, telephone FROM Person WHERE email = ?";
+            "dob, address, telephone, info FROM Person WHERE email = ?";
     private static final String SQL2 = "INSERT INTO Person (first_name, last_name, email, password) VALUES (?, ?, ?, ?)";
+    private static final String SQL3 = "UPDATE Person SET first_name = ?, last_name = ?, dob = ?," +
+            " address = ?, telephone = ?, info = ?, password = ? WHERE email = ?";
     private ConnectionPool connectionPool;
 
     public PersonDao(ConnectionPool connectionPool) {
@@ -83,7 +82,22 @@ public class PersonDao implements Dao<Person, Integer> {
 
     @Override
     public void update(Person entity) {
+        try (Connection con = connectionPool.get();
+             PreparedStatement ps = con.prepareStatement(SQL3)) {
+            ps.setString(1, entity.getFirstName());
+            ps.setString(2, entity.getLastName());
+            ps.setDate(3, Optional.ofNullable(entity.getDob()).map(Date::valueOf).orElse(null));
+            ps.setString(4, entity.getAddress());
+            ps.setString(5, entity.getTelephone());
+            ps.setString(6, entity.getInfo());
+            ps.setString(7, entity.getPassword());
+            ps.setString(8, entity.getEmail());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException();
+        }
     }
+
 
     @Override
     public void delete(Integer id) {
@@ -95,10 +109,12 @@ public class PersonDao implements Dao<Person, Integer> {
                 .firstName(rs.getString("first_name"))
                 .lastName(rs.getString("last_name"))
                 .email(rs.getString("email"))
-                .dob(rs.getDate("dob"))
+                .dob(Optional.ofNullable(rs.getDate("dob"))
+                        .map(Date::toLocalDate).orElse(null))
                 .address(rs.getString("address"))
                 .telephone(rs.getString("telephone"))
                 .id(rs.getInt("id"))
+                .info(rs.getString("info"))
                 .build());
 
     }
