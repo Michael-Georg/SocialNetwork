@@ -42,12 +42,11 @@ public class Profile extends ServletWrapper {
             session.setAttribute(URL, url);
             int person_id = ((Person)session.getAttribute(PERSON)).getId();
             int user_id = user.get().getId();
-        log.info("person id - " + person_id + "requested id - " + user_id);
+        log.info("person id - " + person_id + "; requested id - " + user_id);
             req.setAttribute(FRIEND_STATUS, friendsDao.friendStatus(person_id, user_id));
             req.getRequestDispatcher("/user/profile.jsp").forward(req, resp);
         } else {
             resp.sendRedirect("/auth/error/");
         }
-
     }
 }

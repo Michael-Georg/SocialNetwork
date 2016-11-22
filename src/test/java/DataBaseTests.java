@@ -1,4 +1,5 @@
-import Dao.ConnectionPool;
+import Dao.MessageDao;
+import Dao.common.ConnectionPool;
 import Dao.FriendsDao;
 import Dao.PersonDao;
 import models.Person;
@@ -19,7 +20,7 @@ public class DataBaseTests {
     private static ConnectionPool pool;
     private static PersonDao personDao;
     private static FriendsDao friendsDao;
-
+    private static MessageDao messageDao;
     @BeforeClass
     public static void init() throws Exception {
         pool = ConnectionPool.create("src\\main\\resources\\db.properties");
@@ -27,6 +28,7 @@ public class DataBaseTests {
         init.initDb(pool, "src\\main\\resources\\init.sql");
         personDao = new PersonDao(pool);
         friendsDao = new FriendsDao(pool);
+        messageDao = new MessageDao(pool);
     }
 
     @Test
@@ -99,6 +101,12 @@ public class DataBaseTests {
        assertThat(friendsDao.getAll(3).get(0).getId(), is(4));
         friendsDao.remove(3,4);
         assertThat(friendsDao.getAll(3).size(), is(0));
+
+    }
+
+    @Test
+    public void msgGetAll() throws Exception {
+        System.out.println(messageDao.getAll(1));
 
     }
 }

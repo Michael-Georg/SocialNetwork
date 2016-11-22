@@ -168,6 +168,24 @@ h1 {
     border-radius: 8px;
 }
 
+.search-button{
+    cursor: pointer;
+    height: 36px;
+    background-color: #29c5e6;
+    border-radius: 5px;
+    border: 1px solid #e3e4e8;
+    color: #e3e4e8;
+}
+
+.search-input{
+    background-color: #dde0ee;
+    color: #535353;
+    height: 35px;
+    padding: 0 20px;
+    border: 1px solid #fcfcfc;
+    border-radius: 5px;
+}
+
 .avatar_button {
     border: none;
     width: 100%;
@@ -213,6 +231,9 @@ h1 {
 
 .form-settings {
     display: block;
+}
+
+.search-form{
 }
 
 .settings-line {;
@@ -267,3 +288,11 @@ h1 {
     margin: 10px auto;
     display: block;
 }
+
+/*.post{*/
+    /*margin: 10px;*/
+/*}*/
+
+/*.post-author{*/
+
+/*}*/

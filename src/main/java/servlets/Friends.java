@@ -19,8 +19,8 @@ public class Friends extends ServletWrapper {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         Person person = (Person) session.getAttribute(PERSON);
-        req.setAttribute(FRIENDS, friendsDao.getAll(person.getId()));
+        req.setAttribute(SEARCH_RESULT, friendsDao.getAll(person.getId()));
         session.setAttribute(URL, "/Friends");
-        req.getRequestDispatcher("/user/friends.jsp").forward(req, resp);
+        req.getRequestDispatcher("/user/results.jsp").forward(req, resp);
     }
 }

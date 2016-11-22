@@ -1,4 +1,4 @@
-package Dao;
+package Dao.common;
 
 
 import java.sql.*;

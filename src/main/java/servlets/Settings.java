@@ -35,6 +35,7 @@ public class Settings extends ServletWrapper {
         String info = req.getParameter("info");
         String password = req.getParameter("password");
         LocalDate dob = null;
+        //todo раздельный ввод даты
         try {
             dob = LocalDate.parse(req.getParameter("dob"));
         } catch (DateTimeException e) {

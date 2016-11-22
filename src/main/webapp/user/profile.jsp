@@ -8,6 +8,7 @@
 <head>
     <title>Profile</title>
     <link rel="stylesheet" href="/css/styles.css" type="text/css">
+    <script src="/js/websocket.js"></script>
     <fmt:setLocale value="${sessionScope.lang}"/>
     <fmt:setBundle basename="localization.message" var="loc"/>
     <fmt:message bundle="${loc}" key="dob" var="dob"/>
@@ -26,21 +27,19 @@
                     <div class="page_block">
                         <div class="avatar_wrap">
                             <div>
-                                <img class="page_avatar"
-                                     src='/images/${user.id}.jpg'/>
+                                <img class="page_avatar" src='/images/${user.id}.jpg'/>
                             </div>
                             <c:if test="${person.id ne user.id}">
                                 <form class="only_button" action="/AddRemoveFriend" method="get">
+                                    <input type="hidden" name="user_id" value="${user.id}"/>
                                     <c:choose>
                                         <c:when test="${requestScope.friendStatus eq 1}">
-                                            <button class="avatar_button" type="submit" name="status"
-                                                    value="${user.id}0">
+                                            <button class="avatar_button" type="submit" name="status" value="0">
                                                 remove
                                             </button>
                                         </c:when>
                                         <c:otherwise>
-                                            <button class="avatar_button" type="submit" name="status"
-                                                    value="${user.id}1">
+                                            <button class="avatar_button" type="submit" name="status" value="1">
                                                 add
                                             </button>
                                         </c:otherwise>
@@ -111,6 +110,29 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="page_block">
+
+                        <p>Chat room</p>
+                        <br/>
+                        <div id="addMsg">
+                            <button onclick=showForm()>Add a msg</button>
+                            <%--<div class="button"><a href="#" OnClick="showForm()">Add a msg</a></div>--%>
+                            <form id="msgForm" action="">
+                                <input type="hidden" name="userId" value="${user.id}">
+                                <textarea name="text" id="text" title="123123"></textarea>
+                                <input type="button" class="msg-button" value="Send" onclick=formSubmit()>
+                                <input type="reset" class="button" value="Cancel" onclick=hideForm()>
+
+                            </form>
+                        </div>
+                        <br/>
+
+                        <div id="content">
+                        </div>
+
+                    </div>
+
                 </div>
             </div>
         </div>

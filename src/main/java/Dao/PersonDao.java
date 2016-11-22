@@ -1,19 +1,19 @@
 package Dao;
 
+import Dao.common.ConnectionPool;
 import models.Person;
 
 import java.sql.*;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
 public class PersonDao implements Dao<Person, Integer> {
-    private static final String SQL = "SELECT id, first_name, last_name, email," +
-            " dob, address, telephone, info FROM Person WHERE id = ?";
-    private static final String SQL1 = "SELECT id, first_name, last_name, email, password," +
-            "dob, address, telephone, info FROM Person WHERE email = ?";
+    private static final String SQL = "SELECT id, first_name, last_name, email, dob, address, telephone, info FROM Person WHERE id = ?";
+    private static final String SQL1 = "SELECT id, first_name, last_name, email, password, dob, address, telephone, info FROM Person WHERE email = ?";
     private static final String SQL2 = "INSERT INTO Person (first_name, last_name, email, password) VALUES (?, ?, ?, ?)";
-    private static final String SQL3 = "UPDATE Person SET first_name = ?, last_name = ?, dob = ?," +
-            " address = ?, telephone = ?, info = ?, password = ? WHERE email = ?";
+    private static final String SQL3 = "UPDATE Person SET first_name = ?, last_name = ?, dob = ?, address = ?, telephone = ?, info = ?, password = ? WHERE email = ?";
+    private static final String SQL4 = "SELECT * FROM Person";
     private ConnectionPool connectionPool;
 
     public PersonDao(ConnectionPool connectionPool) {
@@ -22,7 +22,17 @@ public class PersonDao implements Dao<Person, Integer> {
 
     @Override
     public List<Person> getAll() {
-        return null;
+        List<Person> result = new LinkedList<>();
+        try (Connection con = connectionPool.get();
+             Statement st = con.createStatement();
+             ResultSet rs = st.executeQuery(SQL4)) {
+            while (rs.next()) {
+                result.add(readPerson(rs).get());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
     @Override

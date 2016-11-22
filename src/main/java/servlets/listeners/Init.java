@@ -1,8 +1,9 @@
 package servlets.listeners;
 
-import Dao.ConnectionPool;
 import Dao.FriendsDao;
+import Dao.MessageDao;
 import Dao.PersonDao;
+import Dao.common.ConnectionPool;
 import lombok.extern.java.Log;
 import org.h2.Driver;
 
@@ -37,6 +38,7 @@ public class Init implements ServletContextListener {
 
         context.setAttribute(FRIENDS_DAO, new FriendsDao(connectionPool));
         context.setAttribute(PERSON_DAO, new PersonDao(connectionPool));
+        context.setAttribute(MESSAGE_DAO, new MessageDao(connectionPool));
     }
 
     @Override

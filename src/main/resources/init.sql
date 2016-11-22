@@ -16,6 +16,14 @@ CREATE TABLE Friends(
   PRIMARY KEY (id_user, id_friend)
 );
 
+CREATE TABLE Messages (
+  id      INT PRIMARY KEY AUTO_INCREMENT,
+  id_user INT NOT NULL ,
+  text    VARCHAR(255),
+  FOREIGN KEY (id_user) REFERENCES Person(id)
+);
+
+
 INSERT INTO Person (first_name, last_name, dob, email, password, address, telephone, info)
 VALUES ('Alf', 'Alf', '1980-06-15', 'ALF@ALF.ALF', '', 'Franco square, 5/1, 10',
         '+38007654321', 'info info');
@@ -33,3 +41,10 @@ INSERT INTO Friends(id_user, id_friend) VALUES ('1', '2');
 INSERT INTO Friends(id_user, id_friend) VALUES ('1', '3');
 INSERT INTO Friends(id_user, id_friend) VALUES ('1', '4');
 INSERT INTO Friends(id_user, id_friend) VALUES ('2', '1');
+
+INSERT INTO Messages(id, id_user, text) VALUES (1, 1, 'FIRST MSG');
+INSERT INTO Messages(id, id_user, text) VALUES (2, 1, 'ALF MSG');
+INSERT INTO Messages(id, id_user, text) VALUES (3, 2, 'SECOND MSG');
+INSERT INTO Messages(id, id_user, text) VALUES (4, 3, 'THIRD MSG');
+INSERT INTO Messages(id, id_user, text) VALUES (5, 4, 'FORTH MSG');
+

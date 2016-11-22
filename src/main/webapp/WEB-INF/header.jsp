@@ -13,6 +13,12 @@
     <div class="lang">
         <a href="/Location">${sessionScope.lang}</a>
     </div>
+    <div class="lang">
+        <form class="search-form" action="/Search" method="get">
+            <input type="text" class="search-input" placeholder="GET ALL" name="mask">
+            <button class="search-button" type="submit">SEARCH</button>
+        </form>
+    </div>
     <div class="fio inline">
         ${person.firstName} ${person.lastName}
     </div>

@@ -1,5 +1,6 @@
 package Dao;
 
+import Dao.common.ConnectionPool;
 import models.Person;
 
 import java.sql.Connection;

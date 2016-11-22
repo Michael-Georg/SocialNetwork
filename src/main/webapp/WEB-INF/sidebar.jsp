@@ -26,10 +26,10 @@
                                 <a href="${pageContext.request.contextPath}/Friends">${friends}</a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.contextPath}/Profile">${messages}</a>
+                                <a href="${pageContext.request.contextPath}/user/messages.html">${messages}</a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.contextPath}/Profile">${music}</a>
+                                <a href="${pageContext.request.contextPath}/user/messages.jsp">${music}</a>
                             </li>
                             <li>
                                 <a href="${pageContext.request.contextPath}/Settings">Редактировать профиль</a>
