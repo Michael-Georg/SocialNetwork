@@ -110,30 +110,23 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="page_block">
-
-                        <p>Chat room</p>
-                        <br/>
+                    <div class="page_block fl_l">
                         <div id="addMsg">
-                            <button onclick=showForm()>Add a msg</button>
-                            <%--<div class="button"><a href="#" OnClick="showForm()">Add a msg</a></div>--%>
-                            <form id="msgForm" action="">
+                            <button id="msg_start_button" class="msg_start" onclick=showForm()>Add a msg</button>
+                            <form id="msgForm" class="message-form" action="">
                                 <input type="hidden" name="userId" value="${user.id}">
-                                <textarea name="text" id="text" title="123123"></textarea>
-                                <input type="button" class="msg-button" value="Send" onclick=formSubmit()>
-                                <input type="reset" class="button" value="Cancel" onclick=hideForm()>
-
+                                <textarea name="text" id="text" class="settings-info" title="123123"></textarea>
+                                <input type="button" class="post-button" value="Send" onclick=formSubmit()>
+                                <input type="reset" class="post-button" value="Cancel" onclick=hideForm()>
                             </form>
                         </div>
                         <br/>
-
-                        <div id="content">
-                        </div>
-
+                    </div>
+                    <div id="content">
                     </div>
 
                 </div>
+
             </div>
         </div>
     </div>

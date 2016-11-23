@@ -21,25 +21,33 @@ function printMsg(msg) {
 
     var msgDiv = document.createElement("div");
     msgDiv.setAttribute("id", msg.id);
-    msgDiv.setAttribute("class", "post");
+    msgDiv.setAttribute("class", "message_block");
     content.appendChild(msgDiv);
+
     var msgAuthor = document.createElement("div");
-
-    msgDiv.setAttribute("class", "post-author");
+    msgAuthor.setAttribute("class", "post-author");
+    msgAuthor.appendChild(document.createTextNode("NAME & DATE"));
     msgDiv.appendChild(msgAuthor);
-    var msgText = document.createElement("div");
 
+    var msgText = document.createElement("div");
     msgText.setAttribute("class", "post-text");
     msgText.appendChild(document.createTextNode(msg.text));
-    content.appendChild(msgText);
+    msgDiv.appendChild(msgText);
+
+    var msgOptions = document.createElement("div");
+    msgOptions.setAttribute("class", "post-Options");
+    msgOptions.appendChild(document.createTextNode("comment"));
+    msgDiv.appendChild(msgOptions);
 }
 
 function showForm() {
     document.getElementById("msgForm").style.display = '';
+    document.getElementById("msg_start_button").style.display = "none";
 }
 
 function hideForm() {
     document.getElementById("msgForm").style.display = "none";
+    document.getElementById("msg_start_button").style.display = '';
 }
 
 function formSubmit() {
@@ -53,10 +61,4 @@ function formSubmit() {
 
 function init() {
     hideForm();
-    var content = document.getElementById("content");
-
-    var info = document.createElement("p");
-    info.setAttribute("class", "post-text");
-    info.appendChild(document.createTextNode("URL : " + url));
-    content.appendChild(info);
 }

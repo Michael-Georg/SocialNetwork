@@ -19,5 +19,5 @@ dependencies {
                     'org.apache.tomcat:tomcat-websocket-api:+'
 
     // Jackson
-    providedCompile 'com.fasterxml.jackson.core:jackson-databind:+'
+    compile 'com.fasterxml.jackson.core:jackson-databind:+'
 }
