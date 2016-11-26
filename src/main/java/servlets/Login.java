@@ -1,6 +1,6 @@
 package servlets;
 
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 import models.Person;
 
 import javax.servlet.ServletException;
@@ -14,13 +14,16 @@ import java.util.Optional;
 import static servlets.ServletConst.*;
 
 
-@Log
+@Slf4j
 @WebServlet("/Login")
 public class Login extends ServletWrapper {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        log.info(() -> "Login doGet");
+        log.info("awe {} qwe", 123);
+        log.debug("debug");
+        log.error("error");
+        log.warn("error");
         HttpSession session = req.getSession(true);
         Optional<Person> person = Optional.ofNullable((Person) session.getAttribute(PERSON));
         if (person.isPresent())
@@ -35,7 +38,8 @@ public class Login extends ServletWrapper {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        log.info(() -> "Login doPost");
+//        log.info(() -> "Login doPost");
+        log.info("qweqweqwe");
         HttpSession session = req.getSession();
         String email = req.getParameter("email");
         String password = req.getParameter("password");

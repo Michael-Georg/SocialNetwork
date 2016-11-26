@@ -1,6 +1,6 @@
 package servlets;
 
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 import models.Person;
 
 import javax.servlet.ServletException;
@@ -12,8 +12,7 @@ import javax.servlet.http.Part;
 import java.io.IOException;
 
 import static servlets.ServletConst.PERSON;
-
-@Log
+@Slf4j
 @WebServlet("/Upload")
 @MultipartConfig
 public class Upload extends ServletWrapper{
@@ -21,7 +20,7 @@ public class Upload extends ServletWrapper{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("/user/upload.jsp").forward(req, resp);
-
+        log.info("qweqweqweqwe");
     }
     //TODO Need to create external storage for content
     @Override
