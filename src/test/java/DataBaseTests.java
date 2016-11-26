@@ -1,8 +1,9 @@
-import Dao.MessageDao;
-import Dao.common.ConnectionPool;
 import Dao.FriendsDao;
+import Dao.MessageDao;
 import Dao.PersonDao;
+import Dao.common.ConnectionPool;
 import models.Person;
+import models.WSMessage;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import servlets.listeners.Init;
@@ -106,7 +107,12 @@ public class DataBaseTests {
 
     @Test
     public void msgGetAll() throws Exception {
-        System.out.println(messageDao.getAll(1));
-
+        WSMessage msg = WSMessage.builder()
+                .post_id(1)
+                .text("for post 1")
+                .user_id(1)
+                .build();
+        messageDao.add(msg);
+        System.out.println(messageDao.getAllComments(1));
     }
 }

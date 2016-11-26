@@ -7,9 +7,15 @@ import lombok.Data;
 @Data
 @Builder
 @AllArgsConstructor
-public class Message {
+public class WSMessage {
+    private String type;
+
     private int id;
-    private int user_id;
-    private int post_id; // The Message is comment when this param == -1 else it Post
+    private int post_id;
     private String text;
+
+    private int user_id;
+    private String from_firstName;
+    private String from_lastName;
+
 }

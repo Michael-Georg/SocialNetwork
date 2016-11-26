@@ -29,7 +29,7 @@
                         <form id="msgForm">
                             <input type="hidden" name="userId" value="${person.id}">
                             <textarea name="text" id="text" title="123123"></textarea>
-                            <button class="msg-button" value="Send" onclick=formSubmit()>submit</button>
+                            <button class="msg-button" value="Send" onclick=startFormSubmit()>submit</button>
                             <input type="reset" class="button" value="Cancel" onclick=hideForm()>
 
                         </form>

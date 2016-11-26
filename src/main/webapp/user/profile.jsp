@@ -8,15 +8,16 @@
 <head>
     <title>Profile</title>
     <link rel="stylesheet" href="/css/styles.css" type="text/css">
-    <script src="/js/websocket.js"></script>
+
     <fmt:setLocale value="${sessionScope.lang}"/>
     <fmt:setBundle basename="localization.message" var="loc"/>
     <fmt:message bundle="${loc}" key="dob" var="dob"/>
     <fmt:message bundle="${loc}" key="email" var="mail"/>
     <fmt:message bundle="${loc}" key="telephone" var="telephone"/>
     <fmt:message bundle="${loc}" key="address" var="address"/>
+    <script src="/js/websocket.js"></script>
 </head>
-<body>
+<body data-smsg="SEND" data-rmsg="RESET" data-cmsg="COMMENT">
 <div id="wrapper">
     <jsp:include page="/WEB-INF/header.jsp"/>
     <div class="page_layout">
@@ -110,21 +111,24 @@
                             </div>
                         </div>
                     </div>
+                    <c:if test="${person.id eq user.id}">
                     <div class="page_block fl_l">
                         <div id="addMsg">
                             <button id="msg_start_button" class="msg_start" onclick=showForm()>Add a msg</button>
                             <form id="msgForm" class="message-form" action="">
-                                <input type="hidden" name="userId" value="${user.id}">
+                                <input type="hidden" name="userId" value="${person.id}">
                                 <textarea name="text" id="text" class="settings-info" title="123123"></textarea>
-                                <input type="button" class="post-button" value="Send" onclick=formSubmit()>
+                                <input type="button" class="post-button" value="Send" onclick=startFormSubmit()>
                                 <input type="reset" class="post-button" value="Cancel" onclick=hideForm()>
                             </form>
                         </div>
                         <br/>
                     </div>
+                    </c:if>
                     <div id="content">
                     </div>
 
+                    <div class="footer"></div>
                 </div>
 
             </div>

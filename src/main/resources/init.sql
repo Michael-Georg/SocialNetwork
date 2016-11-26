@@ -19,6 +19,7 @@ CREATE TABLE Friends(
 CREATE TABLE Messages (
   id      INT PRIMARY KEY AUTO_INCREMENT,
   id_user INT NOT NULL ,
+  id_post INT NOT NULL ,
   text    VARCHAR(255),
   FOREIGN KEY (id_user) REFERENCES Person(id)
 );
@@ -42,9 +43,15 @@ INSERT INTO Friends(id_user, id_friend) VALUES ('1', '3');
 INSERT INTO Friends(id_user, id_friend) VALUES ('1', '4');
 INSERT INTO Friends(id_user, id_friend) VALUES ('2', '1');
 
-INSERT INTO Messages(id, id_user, text) VALUES (1, 1, 'FIRST MSG');
-INSERT INTO Messages(id, id_user, text) VALUES (2, 1, 'ALF MSG');
-INSERT INTO Messages(id, id_user, text) VALUES (3, 2, 'SECOND MSG');
-INSERT INTO Messages(id, id_user, text) VALUES (4, 3, 'THIRD MSG');
-INSERT INTO Messages(id, id_user, text) VALUES (5, 4, 'FORTH MSG');
+INSERT INTO Messages(id, id_user, text, id_post) VALUES (1, 1, 'FIRST MSG', -1);
+INSERT INTO Messages(id, id_user, text, id_post) VALUES (2, 1, 'ALF MSG', -1);
+INSERT INTO Messages(id, id_user, text, id_post) VALUES (3, 2, 'SECOND MSG', 1);
+INSERT INTO Messages(id, id_user, text, id_post) VALUES (4, 3, 'THIRD MSG', 1);
+INSERT INTO Messages(id, id_user, text, id_post) VALUES (5, 4, 'FORTH MSG', 1);
+INSERT INTO Messages(id, id_user, text, id_post) VALUES (6, 4, 'comment 1', 1);
+INSERT INTO Messages(id, id_user, text, id_post) VALUES (12, 4, 'comment 3', 1);
+INSERT INTO Messages(id, id_user, text, id_post) VALUES (7, 4, 'comment 2', -2);
+INSERT INTO Messages(id, id_user, text, id_post) VALUES (11, 4, 'comment 3', 1);
+INSERT INTO Messages(id, id_user, text, id_post) VALUES (10, 4, 'comment 3', 1);
+INSERT INTO Messages(id, id_user, text, id_post) VALUES (9, 4, 'comment 3', 1);
 
