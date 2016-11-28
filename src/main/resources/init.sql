@@ -10,9 +10,10 @@ CREATE TABLE Person (
   info       VARCHAR(255)
 );
 
-CREATE TABLE Friends(
+CREATE TABLE Relation (
   id_user INT NOT NULL REFERENCES  Person(id),
   id_friend INT NOT NULL REFERENCES Person(id),
+  status INT NOT NULL,
   PRIMARY KEY (id_user, id_friend)
 );
 
@@ -38,10 +39,12 @@ INSERT INTO Person (first_name, last_name, dob, email, password, address, teleph
 VALUES ('Aisha', 'Eglesias', '1980-06-15', 'Aisha_Eglesias@mail.es', 'qwerty', 'Franco square, 5/1, 10',
         '+38007654321');
 
-INSERT INTO Friends(id_user, id_friend) VALUES ('1', '2');
-INSERT INTO Friends(id_user, id_friend) VALUES ('1', '3');
-INSERT INTO Friends(id_user, id_friend) VALUES ('1', '4');
-INSERT INTO Friends(id_user, id_friend) VALUES ('2', '1');
+INSERT INTO Relation (id_user, id_friend, status) VALUES ('1', '2', '2');
+INSERT INTO Relation (id_user, id_friend, status) VALUES ('1', '3', '1');
+INSERT INTO Relation (id_user, id_friend, status) VALUES ('3', '1', '1');
+INSERT INTO Relation (id_user, id_friend, status) VALUES ('2', '1', '2');
+INSERT INTO Relation (id_user, id_friend, status) VALUES ('1', '4', '2');
+INSERT INTO Relation (id_user, id_friend, status) VALUES ('2', '4', '2');
 
 INSERT INTO Messages(id, id_user, text, id_post) VALUES (1, 1, 'FIRST MSG', -1);
 INSERT INTO Messages(id, id_user, text, id_post) VALUES (2, 1, 'ALF MSG', -1);

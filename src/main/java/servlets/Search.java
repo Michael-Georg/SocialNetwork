@@ -22,7 +22,7 @@ public class Search extends ServletWrapper {
         HttpSession session = req.getSession();
         String mask = req.getParameter("mask");
         //todo поиск по всем данным
-        if (mask == null || mask == "") {
+        if (mask == null || mask.equals("")) {
             req.setAttribute(SEARCH_RESULT, personDao.getAll());
         } else if (isNumber(mask)) {
             Optional<Person> person = personDao.getEntity(Integer.parseInt(mask));

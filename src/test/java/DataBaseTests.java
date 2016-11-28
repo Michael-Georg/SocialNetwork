@@ -1,8 +1,9 @@
-import Dao.FriendsDao;
 import Dao.MessageDao;
 import Dao.PersonDao;
+import Dao.RelationDao;
 import Dao.common.ConnectionPool;
 import models.Person;
+import models.Status;
 import models.WSMessage;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -13,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDate;
 
+import static models.Status.BLOCK;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -20,7 +22,7 @@ import static org.hamcrest.core.Is.is;
 public class DataBaseTests {
     private static ConnectionPool pool;
     private static PersonDao personDao;
-    private static FriendsDao friendsDao;
+    private static RelationDao relationDao;
     private static MessageDao messageDao;
     @BeforeClass
     public static void init() throws Exception {
@@ -28,7 +30,7 @@ public class DataBaseTests {
         Init init = new Init();
         init.initDb(pool, "src\\main\\resources\\init.sql");
         personDao = new PersonDao(pool);
-        friendsDao = new FriendsDao(pool);
+        relationDao = new RelationDao(pool);
         messageDao = new MessageDao(pool);
     }
 
@@ -64,7 +66,7 @@ public class DataBaseTests {
     public void printAllFriendsPair() throws Exception {
         try (Connection con = pool.get();
              Statement st = con.createStatement();
-             ResultSet rs = st.executeQuery("SELECT * FROM Friends")) {
+             ResultSet rs = st.executeQuery("SELECT * FROM Relation")) {
             while (rs.next())
                 System.out.println(rs.getInt("id_user") + " + " + rs.getInt("id_friend"));
         }
@@ -93,17 +95,18 @@ public class DataBaseTests {
 
     @Test
     public void printAllFriends() throws Exception {
-        System.out.println(friendsDao.getAll(1).size());
+        System.out.println("FOLLOWing" + relationDao.followingList(1));
+        System.out.println("BLOCK" + relationDao.ignoreList(1));
+        System.out.println("followers" + relationDao.followersList(1));
     }
 
-    @Test
-    public void addRemoveFriend() throws Exception {
-        friendsDao.add(3,4);
-       assertThat(friendsDao.getAll(3).get(0).getId(), is(4));
-        friendsDao.remove(3,4);
-        assertThat(friendsDao.getAll(3).size(), is(0));
-
-    }
+//    @Test
+//    public void addRemoveFriend() throws Exception {
+//        Relation rel = new Relation(1, 2, BLOCK);
+//        relationDao.add(rel);
+//       assertThat(relationDao.followingList(1).get(0).getId(), is(4));
+//
+//    }
 
     @Test
     public void msgGetAll() throws Exception {
@@ -114,5 +117,11 @@ public class DataBaseTests {
                 .build();
         messageDao.add(msg);
         System.out.println(messageDao.getAllComments(1));
+    }
+
+    @Test
+    public void relations() throws Exception {
+        Status ignore = BLOCK;
+        System.out.println(ignore.getType());
     }
 }

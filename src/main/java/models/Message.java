@@ -10,6 +10,6 @@ import lombok.Data;
 public class Message {
     private int id;
     private int user_id;
-    private int post_id; // The Message is comment when this param == -1 else it Post
+    private int post_id; // The Message is comment if this param != -1 else it Post
     private String text;
 }

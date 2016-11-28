@@ -20,4 +20,7 @@ dependencies {
 
     // Jackson
     compile 'com.fasterxml.jackson.core:jackson-databind:+'
+
+    // Validation
+    compile 'javax.validation:validation-api:+'
 }

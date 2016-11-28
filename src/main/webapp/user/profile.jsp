@@ -34,16 +34,16 @@
                                 <form class="only_button" action="/AddRemoveFriend" method="get">
                                     <input type="hidden" name="user_id" value="${user.id}"/>
                                     <c:choose>
-                                        <c:when test="${requestScope.friendStatus eq 1}">
+                                        <c:when test="${requestScope.relationStatus eq 2}">
                                             <button class="avatar_button" type="submit" name="status" value="0">
-                                                remove
+                                                unfollow
                                             </button>
                                         </c:when>
-                                        <c:otherwise>
-                                            <button class="avatar_button" type="submit" name="status" value="1">
-                                                add
+                                        <c:when test="${requestScope.relationStatus eq 0}">
+                                            <button class="avatar_button" type="submit" name="status" value="2">
+                                                follow
                                             </button>
-                                        </c:otherwise>
+                                        </c:when>
                                     </c:choose>
                                 </form>
                             </c:if>
@@ -117,7 +117,7 @@
                             <button id="msg_start_button" class="msg_start" onclick=showForm()>Add a msg</button>
                             <form id="msgForm" class="message-form" action="">
                                 <input type="hidden" name="userId" value="${person.id}">
-                                <textarea name="text" id="text" class="settings-info" title="123123"></textarea>
+                                <label for="text"></label><textarea name="text" id="text" class="settings-info" maxlength="255" autofocus></textarea>
                                 <input type="button" class="post-button" value="Send" onclick=startFormSubmit()>
                                 <input type="reset" class="post-button" value="Cancel" onclick=hideForm()>
                             </form>

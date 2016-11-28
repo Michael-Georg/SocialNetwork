@@ -8,9 +8,9 @@ function onMessage(event) {
     printMsg(msg);
 }
 
-function addMsg(text, userId, postId, type) {
+function addMsg(text, postId, type) {
     const msg = {
-        user_id: userId,
+        // user_id: userId,
         post_id: postId,
         text: text,
         from_firstName: '',
@@ -54,7 +54,7 @@ function printMsg(msg) {
         post.appendChild(addButton(document.body.dataset.cmsg, () => {
             if (comments.getAttribute('value') === '0') {
                 comments.setAttribute('value', '1');
-                addMsg('', 0, comments.id, "comments");
+                addMsg('', comments.id, "comments");
                 createForm(comments.id);
             } else {
                 comments.style.display = '';
@@ -93,9 +93,9 @@ function startFormSubmit() {
 
 function formSubmit(form, postId) {
     const text = form.elements["text"].value;
-    const userId = document.getElementById("msgForm").elements["userId"].value;
+    // const userId = document.getElementById("msgForm").elements["userId"].value;
     form.reset();
-    addMsg(text, userId, postId, "add");
+    addMsg(text, postId, "add");
 }
 
 function createForm(postId) {
@@ -105,6 +105,8 @@ function createForm(postId) {
     const i = document.createElement("textarea");
     i.setAttribute('class', "comment-input");
     i.setAttribute('name', "text");
+    i.setAttribute('maxlength', '255');
+    i.autofocus;
     f.appendChild(i);
     f.appendChild(addButton(document.body.dataset.smsg, (evt) => {
         formSubmit(document.getElementById(postId).getElementsByTagName("form")[0], f.parentNode.id);

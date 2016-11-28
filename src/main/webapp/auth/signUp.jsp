@@ -39,7 +39,7 @@
         </div>
         <div  class="settings-line">
             <label class="settings-label" for="password">${password}</label>
-            <input class="settings-input" id="password" type="password" name="password" autocomplete="off" required/>
+            <input class="settings-input" id="password" type="password" name="password" autocomplete="off"/>
         </div>
         <div class="errmsg settings-line">
             <c:if test='${requestScope.error eq "errEmail"}'>

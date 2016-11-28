@@ -5,7 +5,7 @@
 <html>
 <head>
 
-    <title>Friends</title>
+    <title>Results</title>
     <link rel="stylesheet" href="/css/styles.css">
     <fmt:setLocale value="${sessionScope.lang}"/>
     <fmt:setBundle basename="localization.message" var="loc"/>
@@ -21,11 +21,11 @@
                 <div class="page_block">
                     <c:choose>
                         <c:when test="${empty result}">
-                            {} ERROR MSG
+                            LIST IS EMPTY
                         </c:when>
                         <c:otherwise>
+                            ${requestScope.resultMsg}
                             <c:forEach var="user" items="${result}">
-
                                 <div class="settings-line"><a
                                         href="/Profile/${user.id}"> ${user.firstName} ${user.lastName}</a>
                                 </div>

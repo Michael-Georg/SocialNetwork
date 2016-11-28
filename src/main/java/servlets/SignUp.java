@@ -30,6 +30,7 @@ public class SignUp extends ServletWrapper {
         log.info(() -> "Registration");
         HttpSession session = req.getSession();
 
+
         String email = req.getParameter("email");
         if (personDao.getByEmail(email).isPresent()) {
             req.setAttribute(ERROR, "errEmail");

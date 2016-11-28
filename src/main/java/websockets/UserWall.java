@@ -73,6 +73,7 @@ public class UserWall {
         ObjectMapper mapper = new ObjectMapper();
         try {
             WSMessage msg = mapper.readValue(json, WSMessage.class);
+            msg.setUser_id(person.getId());
             switch (msg.getType()) {
                 case "add": {
 //                log.info("send msg to" + sessionMap.get(id).size() + " users");
@@ -101,7 +102,7 @@ public class UserWall {
         return mapper.writeValueAsString(WSMessage.builder()
                 .id(msg.getId())
                 .text(msg.getText())
-                .user_id(msg.getUser_id())
+                .user_id(id)
                 .post_id(msg.getPost_id())
                 .from_firstName(user.getFirstName())
                 .from_lastName(user.getLastName())

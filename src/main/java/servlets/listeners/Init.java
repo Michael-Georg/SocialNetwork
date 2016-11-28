@@ -1,6 +1,6 @@
 package servlets.listeners;
 
-import Dao.FriendsDao;
+import Dao.RelationDao;
 import Dao.MessageDao;
 import Dao.PersonDao;
 import Dao.common.ConnectionPool;
@@ -36,7 +36,7 @@ public class Init implements ServletContextListener {
         initDb(connectionPool, realPath + pathToInit);
 
 
-        context.setAttribute(FRIENDS_DAO, new FriendsDao(connectionPool));
+        context.setAttribute(FRIENDS_DAO, new RelationDao(connectionPool));
         context.setAttribute(PERSON_DAO, new PersonDao(connectionPool));
         context.setAttribute(MESSAGE_DAO, new MessageDao(connectionPool));
     }

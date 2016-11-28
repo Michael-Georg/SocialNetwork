@@ -5,7 +5,7 @@
 <html>
     <head>
         <title>sidebar</title>
-        <%--<link rel="stylesheet" href="/css/styles.css" type="text/css">--%>
+            <%--<link rel="stylesheet" href="/css/styles.css" type="text/css">--%>
         <fmt:setLocale value="${sessionScope.lang}"/>
         <fmt:setBundle basename="localization.message" var="loc"/>
         <fmt:message bundle="${loc}" key="friends" var="friends"/>
@@ -23,7 +23,13 @@
                     <nav>
                         <ul class="side_menu">
                             <li>
-                                <a href="${pageContext.request.contextPath}/Friends">${friends}</a>
+                                <a href="${pageContext.request.contextPath}/Followers">Followers</a>
+                            </li>
+                            <li>
+                                <a href="${pageContext.request.contextPath}/Following">FOLLOWING</a>
+                            </li>
+                            <li>
+                                <a href="${pageContext.request.contextPath}/BlackList">BlackList</a>
                             </li>
                             <li>
                                 <a href="${pageContext.request.contextPath}/user/messages.html">${messages}</a>
