@@ -48,13 +48,13 @@ INSERT INTO Relation (id_user, id_friend, status) VALUES ('2', '4', '2');
 
 INSERT INTO Messages(id, id_user, text, id_post) VALUES (1, 1, 'FIRST MSG', -1);
 INSERT INTO Messages(id, id_user, text, id_post) VALUES (2, 1, 'ALF MSG', -1);
-INSERT INTO Messages(id, id_user, text, id_post) VALUES (3, 2, 'SECOND MSG', 1);
-INSERT INTO Messages(id, id_user, text, id_post) VALUES (4, 3, 'THIRD MSG', 1);
-INSERT INTO Messages(id, id_user, text, id_post) VALUES (5, 4, 'FORTH MSG', 1);
+INSERT INTO Messages(id, id_user, text, id_post) VALUES (3, 2, 'SECOND MSG', -1);
+INSERT INTO Messages(id, id_user, text, id_post) VALUES (4, 2, 'THIRD MSG', -1);
+INSERT INTO Messages(id, id_user, text, id_post) VALUES (5, 4, 'FORTH MSG', 2);
 INSERT INTO Messages(id, id_user, text, id_post) VALUES (6, 4, 'comment 1', 1);
-INSERT INTO Messages(id, id_user, text, id_post) VALUES (12, 4, 'comment 3', 1);
-INSERT INTO Messages(id, id_user, text, id_post) VALUES (7, 4, 'comment 2', -2);
-INSERT INTO Messages(id, id_user, text, id_post) VALUES (11, 4, 'comment 3', 1);
-INSERT INTO Messages(id, id_user, text, id_post) VALUES (10, 4, 'comment 3', 1);
-INSERT INTO Messages(id, id_user, text, id_post) VALUES (9, 4, 'comment 3', 1);
+INSERT INTO Messages(id, id_user, text, id_post) VALUES (12, 4, 'comment 3', 2);
+INSERT INTO Messages(id, id_user, text, id_post) VALUES (7, 4, 'comment 2', -1);
+INSERT INTO Messages(id, id_user, text, id_post) VALUES (11, 4, 'comment 3', 3);
+INSERT INTO Messages(id, id_user, text, id_post) VALUES (10, 4, 'comment 3', 4);
+INSERT INTO Messages(id, id_user, text, id_post) VALUES (9, 4, 'comment 3', 4);
 

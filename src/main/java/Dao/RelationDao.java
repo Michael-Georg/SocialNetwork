@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+
 @Slf4j
 public class RelationDao {
     private ConnectionPool connectionPool;
@@ -21,13 +22,13 @@ public class RelationDao {
         this.connectionPool = connectionPool;
     }
 
-    public void add(Relation relation){
+    public void add(Relation relation) {
         String SQL2 = "INSERT INTO Relation (id_user, id_friend, status) VALUES (?, ?, ?)";
-        try(Connection con = connectionPool.get();
-            PreparedStatement ps = con.prepareStatement(SQL2)){
+        try (Connection con = connectionPool.get();
+             PreparedStatement ps = con.prepareStatement(SQL2)) {
             ps.setInt(1, relation.getUser_id());
             ps.setInt(2, relation.getFriend_id());
-            ps.setInt(3, relation.getStatus().getType());
+            ps.setInt(3, relation.getStatus());
             ps.executeUpdate();
         } catch (SQLException e) {
             log.error("{}", e);
@@ -35,11 +36,12 @@ public class RelationDao {
 
     }
 
-    public void update(Relation relation){
+    public void update(Relation relation) {
         String SQL = "UPDATE Relation SET status = ? WHERE id_friend = ? AND id_user = ?";
-        try(Connection con = connectionPool.get();
-            PreparedStatement ps = con.prepareStatement(SQL)){
-            ps.setInt(1, relation.getStatus().getType());
+        String SQL1 = "UPDATE Relation SET status = ? WHERE id_user = ? AND id_friend = ?";
+        try (Connection con = connectionPool.get();
+             PreparedStatement ps = con.prepareStatement(relation.getStatus() == 1 ? SQL1 : SQL)) {
+            ps.setInt(1, relation.getStatus());
             ps.setInt(2, relation.getFriend_id());
             ps.setInt(3, relation.getUser_id());
             ps.executeUpdate();
@@ -49,10 +51,10 @@ public class RelationDao {
 
     }
 
-    public void remove(Relation relation){
+    public void remove(Relation relation) {
         String SQL1 = "DELETE FROM Relation WHERE id_user = ? AND id_friend =?";
-        try(Connection con = connectionPool.get();
-            PreparedStatement ps = con.prepareStatement(SQL1)){
+        try (Connection con = connectionPool.get();
+             PreparedStatement ps = con.prepareStatement(SQL1)) {
             ps.setInt(1, relation.getUser_id());
             ps.setInt(2, relation.getFriend_id());
             ps.executeUpdate();
@@ -62,27 +64,31 @@ public class RelationDao {
     }
 
 
-    public int getRelation(int userId, int friendId){
+    public int getRelation(int userId, int friendId) {
         String SQL3 = "SELECT * FROM Relation WHERE id_user = ? AND id_friend =?";
-        try(Connection con = connectionPool.get();
-            PreparedStatement ps = con.prepareStatement(SQL3)){
-            ps.setInt(1, userId);
-            ps.setInt(2, friendId);
-            try(ResultSet rs = ps.executeQuery()){
-                return rs.next() ? rs.getInt("status") : 0;
+        if (userId == friendId)
+            return 2;
+        else {
+            try (Connection con = connectionPool.get();
+                 PreparedStatement ps = con.prepareStatement(SQL3)) {
+                ps.setInt(1, userId);
+                ps.setInt(2, friendId);
+                try (ResultSet rs = ps.executeQuery()) {
+                    return rs.next() ? rs.getInt("status") : 0;
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
 
-    public List<Person> followersList(int userId){
+    public List<Person> followersList(int userId) {
         String SQL = "SELECT first_name, last_name, id FROM Person WHERE id IN " +
                 "(SELECT id_user FROM Relation WHERE id_friend = ? AND status = ?)";
         return getAll(userId, Status.FOLLOW, SQL);
     }
 
-    public List<Person> ignoreList(int userId){
+    public List<Person> ignoreList(int userId) {
 
         String SQL = "SELECT first_name, last_name, id FROM Person WHERE id IN " +
                 "(SELECT id_user FROM Relation WHERE id_friend = ? AND status = ?)";
@@ -99,15 +105,15 @@ public class RelationDao {
     }
 
 
-    private List<Person> getAll(int userId, Status status, String sql){
+    private List<Person> getAll(int userId, Status status, String sql) {
         List<Person> result = new LinkedList<>();
-        try(Connection con = connectionPool.get();
-            PreparedStatement ps = con.prepareStatement(sql)){
+        try (Connection con = connectionPool.get();
+             PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, userId);
             ps.setInt(2, status.getType());
-            try(ResultSet rs = ps.executeQuery()){
-                while(rs.next())
-                    result.add(readPerson(rs).get());
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next())
+                    result.add(readPerson(rs).orElse(null));
                 return result;
             }
         } catch (SQLException e) {

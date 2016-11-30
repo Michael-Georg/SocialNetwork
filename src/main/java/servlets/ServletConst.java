@@ -5,6 +5,9 @@ public interface ServletConst {
     String FRIEND_STATUS = "relationStatus";
     String SEARCH_RESULT = "result";
     String SEARCH_RESULT_MSG = "resultMsg";
+    String OPTIONAL_BUTTON="optionalButton";
+    String OPTIONAL_BUTTON_NAME="buttonName";
+
     String USER = "user";
     String config = "WEB-INF/classes/db.properties";
     String PERSON_DAO = "personDao";

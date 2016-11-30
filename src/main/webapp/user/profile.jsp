@@ -17,8 +17,9 @@
     <fmt:message bundle="${loc}" key="address" var="address"/>
     <script src="/js/websocket.js"></script>
 </head>
-<body data-smsg="SEND" data-rmsg="RESET" data-cmsg="COMMENT">
+<body data-smsg="SEND" data-rmsg="RESET" data-cmsg="COMMENT" data-relation="${requestScope.relationStatus}">
 <div id="wrapper">
+    <p4>STATUS:!!! ${requestScope.relationStatus}</p4>
     <jsp:include page="/WEB-INF/header.jsp"/>
     <div class="page_layout">
         <jsp:include page="/WEB-INF/sidebar.jsp"/>
@@ -50,84 +51,98 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="main_section">
-                    <div class="page_block fl_l">
-                        <div class="avatar_wrap">
-                            <div>
-                                <h2 class="page_name"> ${user.firstName} ${user.lastName}</h2>
-                            </div>
-                            <div class="profile_info">
-                                <c:if test="${not empty user.dob}">
-                                    <div class="info_line">
-                                        <div class="label fl_l">
-                                                ${dob}:
-                                        </div>
-                                        <div>
-                                                ${user.dob}
-                                        </div>
-                                    </div>
-                                </c:if>
-                                <c:if test="${not empty user.telephone}">
-                                    <div class="info_line">
-                                        <div class="label fl_l">
-                                                ${telephone}:
-                                        </div>
-                                        <div>
-                                                ${user.telephone}
-                                        </div>
-                                    </div>
-                                </c:if>
-                                <c:if test="${not empty user.email}">
-                                    <div class="info_line">
-                                        <div class="label fl_l">
-                                                ${mail}:
-                                        </div>
-                                        <div>
-                                                ${user.email}
-                                        </div>
-                                    </div>
-                                </c:if>
-                                <c:if test="${not empty user.address}">
-                                    <div class="info_line">
-                                        <div class="label fl_l">
-                                                ${address}:
-                                        </div>
-                                        <div>
-                                                ${user.address}
-                                        </div>
-                                    </div>
-                                </c:if>
-                                <c:if test="${not empty user.info}">
-                                    <div class="info_line">
-                                        <div class="label fl_l">
-                                            info:
-                                        </div>
-                                        <div>
-                                                ${user.info}
-                                        </div>
-                                    </div>
-                                </c:if>
+                    <c:choose>
+                        <c:when test="${requestScope.relationStatus eq 1}">
+                            <h2 class="page_name"> ${user.firstName} ${user.lastName}
+                                BLOCKED YOU
+                            </h2>
+                        </c:when>
+                        <c:otherwise>
 
-                            </div>
-                        </div>
-                    </div>
-                    <c:if test="${person.id eq user.id}">
-                    <div class="page_block fl_l">
-                        <div id="addMsg">
-                            <button id="msg_start_button" class="msg_start" onclick=showForm()>Add a msg</button>
-                            <form id="msgForm" class="message-form" action="">
-                                <input type="hidden" name="userId" value="${person.id}">
-                                <label for="text"></label><textarea name="text" id="text" class="settings-info" maxlength="255" autofocus></textarea>
-                                <input type="button" class="post-button" value="Send" onclick=startFormSubmit()>
-                                <input type="reset" class="post-button" value="Cancel" onclick=hideForm()>
-                            </form>
-                        </div>
-                        <br/>
-                    </div>
-                    </c:if>
-                    <div id="content">
-                    </div>
+                            <div class="page_block fl_l">
+                                <div class="avatar_wrap">
+                                    <div>
+                                        <h2 class="page_name"> ${user.firstName} ${user.lastName}</h2>
+                                    </div>
+                                    <div class="profile_info">
+                                        <c:if test="${not empty user.dob}">
+                                            <div class="info_line">
+                                                <div class="label fl_l">
+                                                        ${dob}:
+                                                </div>
+                                                <div>
+                                                        ${user.dob}
+                                                </div>
+                                            </div>
+                                        </c:if>
+                                        <c:if test="${not empty user.telephone}">
+                                            <div class="info_line">
+                                                <div class="label fl_l">
+                                                        ${telephone}:
+                                                </div>
+                                                <div>
+                                                        ${user.telephone}
+                                                </div>
+                                            </div>
+                                        </c:if>
+                                        <c:if test="${not empty user.email}">
+                                            <div class="info_line">
+                                                <div class="label fl_l">
+                                                        ${mail}:
+                                                </div>
+                                                <div>
+                                                        ${user.email}
+                                                </div>
+                                            </div>
+                                        </c:if>
+                                        <c:if test="${not empty user.address}">
+                                            <div class="info_line">
+                                                <div class="label fl_l">
+                                                        ${address}:
+                                                </div>
+                                                <div>
+                                                        ${user.address}
+                                                </div>
+                                            </div>
+                                        </c:if>
+                                        <c:if test="${not empty user.info}">
+                                            <div class="info_line">
+                                                <div class="label fl_l">
+                                                    info:
+                                                </div>
+                                                <div>
+                                                        ${user.info}
+                                                </div>
+                                            </div>
+                                        </c:if>
 
+                                    </div>
+                                </div>
+                            </div>
+                            <c:if test="${person.id eq user.id}">
+                                <div class="page_block fl_l">
+                                    <div id="addMsg">
+                                        <button id="msg_start_button" class="msg_start" onclick=showForm()>Add a msg
+                                        </button>
+                                        <form id="msgForm" class="message-form" action="">
+                                            <input type="hidden" name="userId" value="${person.id}">
+                                            <label for="text"></label><textarea name="text" id="text"
+                                                                                class="settings-info"
+                                                                                maxlength="255" autofocus></textarea>
+                                            <input type="button" class="post-button" value="Send"
+                                                   onclick=startFormSubmit()>
+                                            <input type="reset" class="post-button" value="Cancel" onclick=hideForm()>
+                                        </form>
+                                    </div>
+                                    <br/>
+                                </div>
+                            </c:if>
+                            <div id="content">
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
                     <div class="footer"></div>
                 </div>
 

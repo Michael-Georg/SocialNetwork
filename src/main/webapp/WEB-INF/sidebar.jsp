@@ -18,7 +18,9 @@
             <div class="sidebar">
                 <div class="page_block">
                     <div class="avatar_wrap">
-                        <img class="img_circle" src="/images/${person.id}.jpg"/>
+                        <a href="/Person/${person.id}">
+                            <img class="img_circle" src="/images/${person.id}.jpg"/>
+                        </a>
                     </div>
                     <nav>
                         <ul class="side_menu">

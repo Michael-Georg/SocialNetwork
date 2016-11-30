@@ -34,6 +34,7 @@ function forPrintMsg(msg, parent) {
 }
 
 function printMsg(msg) {
+    const relation = document.body.dataset.relation;
     if (msg.post_id === -1) {
         const content = document.getElementById("content");
         const mD = document.createElement("div");
@@ -51,20 +52,21 @@ function printMsg(msg) {
         mD.appendChild(comments);
 
         forPrintMsg(msg, post);
-        post.appendChild(addButton(document.body.dataset.cmsg, () => {
-            if (comments.getAttribute('value') === '0') {
-                comments.setAttribute('value', '1');
-                addMsg('', comments.id, "comments");
-                createForm(comments.id);
-            } else {
-                comments.style.display = '';
-            }
-            comments.parentNode.getElementsByTagName("button")[0].style.display = "none";
-        }));
-
         content.insertBefore(mD, content.getElementsByTagName("div")[0]);
+        if (relation != 0) {
+            post.appendChild(addButton(document.body.dataset.cmsg, () => {
+                if (comments.getAttribute('value') === '0') {
+                    comments.setAttribute('value', '1');
+                    addMsg('', comments.id, "comments");
+                    createForm(comments.id);
+                } else {
+                    comments.style.display = '';
+                }
+                comments.parentNode.getElementsByTagName("button")[0].style.display = "none";
+            }));
+        }
 
-    } else {
+    } else if (relation != 0) {
         const comment = document.getElementById(msg.post_id);
         if (comment.getAttribute("value") !== '0') {
             const msgDiv = document.createElement("div");
