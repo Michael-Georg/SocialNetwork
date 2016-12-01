@@ -1,13 +1,14 @@
 package Dao;
 
 import Dao.common.ConnectionPool;
+import lombok.extern.slf4j.Slf4j;
 import models.Person;
 
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-
+@Slf4j
 public class PersonDao implements Dao<Person, Integer> {
     private static final String SQL = "SELECT id, first_name, last_name, email, dob, address, telephone, info FROM Person WHERE id = ?";
     private static final String SQL1 = "SELECT id, first_name, last_name, email, password, dob, address, telephone, info FROM Person WHERE email = ?";
@@ -27,11 +28,10 @@ public class PersonDao implements Dao<Person, Integer> {
              Statement st = con.createStatement();
              ResultSet rs = st.executeQuery(SQL4)) {
             while (rs.next()) {
-                result.add(readPerson(rs).get());
+                result.add(readPerson(rs).orElse(null));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-        }
+            log.error("get all error");        }
         return result;
     }
 

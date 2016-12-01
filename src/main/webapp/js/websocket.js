@@ -24,7 +24,7 @@ function addMsg(text, postId, type) {
 function forPrintMsg(msg, parent) {
     const msgAuthor = document.createElement("div");
     msgAuthor.setAttribute("class", "post-author");
-    msgAuthor.appendChild(document.createTextNode(msg.from_firstName));
+    msgAuthor.appendChild(document.createTextNode(msg.from_firstName + " " + msg.from_lastName));
     parent.appendChild(msgAuthor);
 
     const msgText = document.createElement("div");

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+        version="2.1">
+    <description>Useful for formatting output list of Person</description>
+    <display-name>Person List</display-name>
+    <tlib-version>1.0</tlib-version>
+    <short-name>pl</short-name>
+    <uri>http://SocialNetwork.com</uri>
+
+    <tag>
+        <name>list</name>
+        <tag-class>servlets.taglibs.IterateList</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <description>
+                Collection of items to iterate over.
+            </description>
+            <name>collection</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>
+                 Create optional button for remove/add/block user
+            </description>
+            <name>buttonType</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>
+                Name for special button
+            </description>
+            <name>buttonName</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+</taglib>

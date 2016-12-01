@@ -23,22 +23,19 @@ public class Friends extends ServletWrapper {
         switch (url.substring(1)) {
             case "BlackList": {
                 req.setAttribute(SEARCH_RESULT, relationDao.ignoreList(person.getId()));
-                req.setAttribute(SEARCH_RESULT_MSG, "blacklist");
-                req.setAttribute(OPTIONAL_BUTTON, "blocked");
+                req.setAttribute(SEARCH_RESULT_MSG, "blackList");
                 req.setAttribute(OPTIONAL_BUTTON_NAME, "remove");
                 break;
             }
             case "Followers": {
                 req.setAttribute(SEARCH_RESULT, relationDao.followersList(person.getId()));
                 req.setAttribute(SEARCH_RESULT_MSG, "followers");
-                req.setAttribute(OPTIONAL_BUTTON, "followers");
                 req.setAttribute(OPTIONAL_BUTTON_NAME, "block");
                 break;
             }
             case "Following": {
                 req.setAttribute(SEARCH_RESULT, relationDao.followingList(person.getId()));
                 req.setAttribute(SEARCH_RESULT_MSG, "following");
-                req.setAttribute(OPTIONAL_BUTTON, "following");
                 req.setAttribute(OPTIONAL_BUTTON_NAME, "unfollow");
                 break;
             }

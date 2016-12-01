@@ -13,7 +13,7 @@
     <fmt:message bundle="${loc}" key="email" var="mail"/>
     <fmt:message bundle="${loc}" key="password" var="password"/>
     <fmt:message bundle="${loc}" key="signIn" var="signIn"/>
-    <fmt:message bundle="${loc}" key="errMsg" var="errMsg"/>
+    <fmt:message bundle="${loc}" key="login.errMsg" var="errMsg"/>
 </head>
 <body>
 <div id="wrapper">

@@ -21,6 +21,8 @@
     <fmt:message bundle="${loc}" key="email" var="mail"/>
     <fmt:message bundle="${loc}" key="password" var="password"/>
     <fmt:message bundle="${loc}" key="signIn" var="signIn"/>
+    <fmt:message bundle="${loc}" key="upload" var="upload"/>
+    <fmt:message bundle="${loc}" key="info" var="info"/>
 
 </head>
 <body>
@@ -38,7 +40,7 @@
                                      src='/images/${person.id}.jpg'/>
                             </div>
                             <form class="only_button" action="/Upload" method="get">
-                                <button class="avatar_button" type="submit">Upload</button>
+                                <button class="avatar_button" type="submit">${upload}</button>
                             </form>
                         </div>
                     </div>
@@ -88,7 +90,7 @@
                                 </div>
                             </div>
                             <div class="settings-line">
-                                <label class="settings-label" for="info">INFO</label>
+                                <label class="settings-label" for="info">${info}</label>
                                 <div class="settings-input-wrap">
                                     <textarea class="settings-info" id="info" name="info" maxlength="255"></textarea>
                                 </div>

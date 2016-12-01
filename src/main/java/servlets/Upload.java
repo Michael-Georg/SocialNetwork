@@ -12,6 +12,7 @@ import javax.servlet.http.Part;
 import java.io.IOException;
 
 import static servlets.ServletConst.PERSON;
+
 @Slf4j
 @WebServlet("/Upload")
 @MultipartConfig
@@ -20,7 +21,7 @@ public class Upload extends ServletWrapper{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("/user/upload.jsp").forward(req, resp);
-        log.info("qweqweqweqwe");
+        log.info("forwarding to upload.jsp");
     }
     //TODO Need to create external storage for content
     @Override
@@ -28,7 +29,7 @@ public class Upload extends ServletWrapper{
         Part filePart = req.getPart("file");
         int id = ((Person) req.getSession().getAttribute(PERSON)).getId();
         filePart.write(getServletContext().getRealPath("/images/") + id + ".jpg" );
-
+        log.info("avatar upload");
         resp.sendRedirect("/Profile/" + id);
 
     }

@@ -7,7 +7,7 @@
 <html>
 <head>
     <title>Profile</title>
-    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css" type="text/css">
 
     <fmt:setLocale value="${sessionScope.lang}"/>
     <fmt:setBundle basename="localization.message" var="loc"/>
@@ -15,11 +15,17 @@
     <fmt:message bundle="${loc}" key="email" var="mail"/>
     <fmt:message bundle="${loc}" key="telephone" var="telephone"/>
     <fmt:message bundle="${loc}" key="address" var="address"/>
-    <script src="/js/websocket.js"></script>
+    <fmt:message bundle="${loc}" key="wall.add" var="add"/>
+    <fmt:message bundle="${loc}" key="wall.cancel" var="cancel"/>
+    <fmt:message bundle="${loc}" key="wall.comments" var="comments"/>
+    <fmt:message bundle="${loc}" key="follow" var="follow"/>
+    <fmt:message bundle="${loc}" key="unfollow" var="unfollow"/>
+    <fmt:message bundle="${loc}" key="page.blockMsg" var="blockMsg"/>
+    <fmt:message bundle="${loc}" key="wall.startMsg" var="startMsg"/>
+    <script src="${pageContext.request.contextPath}/js/websocket.js"></script>
 </head>
-<body data-smsg="SEND" data-rmsg="RESET" data-cmsg="COMMENT" data-relation="${requestScope.relationStatus}">
+<body data-smsg="${add}" data-rmsg="${cancel}" data-cmsg="${comments}" data-relation="${requestScope.relationStatus}">
 <div id="wrapper">
-    <p4>STATUS:!!! ${requestScope.relationStatus}</p4>
     <jsp:include page="/WEB-INF/header.jsp"/>
     <div class="page_layout">
         <jsp:include page="/WEB-INF/sidebar.jsp"/>
@@ -32,17 +38,18 @@
                                 <img class="page_avatar" src='/images/${user.id}.jpg'/>
                             </div>
                             <c:if test="${person.id ne user.id}">
-                                <form class="only_button" action="/AddRemoveFriend" method="get">
+                                <form class="only_button" action="${pageContext.request.contextPath}/AddRemoveFriend"
+                                      method="get">
                                     <input type="hidden" name="user_id" value="${user.id}"/>
                                     <c:choose>
                                         <c:when test="${requestScope.relationStatus eq 2}">
                                             <button class="avatar_button" type="submit" name="status" value="0">
-                                                unfollow
+                                                    ${unfollow}
                                             </button>
                                         </c:when>
                                         <c:when test="${requestScope.relationStatus eq 0}">
                                             <button class="avatar_button" type="submit" name="status" value="2">
-                                                follow
+                                                    ${follow}
                                             </button>
                                         </c:when>
                                     </c:choose>
@@ -55,12 +62,14 @@
                 <div class="main_section">
                     <c:choose>
                         <c:when test="${requestScope.relationStatus eq 1}">
-                            <h2 class="page_name"> ${user.firstName} ${user.lastName}
-                                BLOCKED YOU
-                            </h2>
+                            <div class="page_block fl_l">
+                                <div class="avatar_wrap">
+                                    <h2 class="page_name"> ${user.firstName} ${user.lastName}</h2>
+                                    <h1>${blockMsg}</h1>
+                                </div>
+                            </div>
                         </c:when>
                         <c:otherwise>
-
                             <div class="page_block fl_l">
                                 <div class="avatar_wrap">
                                     <div>
@@ -117,23 +126,22 @@
                                                 </div>
                                             </div>
                                         </c:if>
-
                                     </div>
                                 </div>
                             </div>
                             <c:if test="${person.id eq user.id}">
                                 <div class="page_block fl_l">
                                     <div id="addMsg">
-                                        <button id="msg_start_button" class="msg_start" onclick=showForm()>Add a msg
-                                        </button>
+                                        <button id="msg_start_button" class="msg_start" onclick=showForm()>${startMsg}</button>
                                         <form id="msgForm" class="message-form" action="">
                                             <input type="hidden" name="userId" value="${person.id}">
                                             <label for="text"></label><textarea name="text" id="text"
                                                                                 class="settings-info"
                                                                                 maxlength="255" autofocus></textarea>
-                                            <input type="button" class="post-button" value="Send"
+                                            <input type="button" class="post-button" value="${add}"
                                                    onclick=startFormSubmit()>
-                                            <input type="reset" class="post-button" value="Cancel" onclick=hideForm()>
+                                            <input type="reset" class="post-button" value="${cancel}"
+                                                   onclick=hideForm()>
                                         </form>
                                     </div>
                                     <br/>

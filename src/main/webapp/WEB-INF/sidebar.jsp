@@ -8,9 +8,11 @@
             <%--<link rel="stylesheet" href="/css/styles.css" type="text/css">--%>
         <fmt:setLocale value="${sessionScope.lang}"/>
         <fmt:setBundle basename="localization.message" var="loc"/>
-        <fmt:message bundle="${loc}" key="friends" var="friends"/>
-        <fmt:message bundle="${loc}" key="messages" var="messages"/>
-        <fmt:message bundle="${loc}" key="music" var="music"/>
+        <fmt:message bundle="${loc}" key="followers" var="followers"/>
+        <fmt:message bundle="${loc}" key="following" var="following"/>
+        <fmt:message bundle="${loc}" key="blackList" var="blackList"/>
+        <fmt:message bundle="${loc}" key="audio" var="audio"/>
+        <fmt:message bundle="${loc}" key="settings" var="settings"/>
         <fmt:message bundle="${loc}" key="signOut" var="signOut"/>
     </head>
     <body>
@@ -18,29 +20,26 @@
             <div class="sidebar">
                 <div class="page_block">
                     <div class="avatar_wrap">
-                        <a href="/Person/${person.id}">
+                        <a href="/Profile/${person.id}">
                             <img class="img_circle" src="/images/${person.id}.jpg"/>
                         </a>
                     </div>
                     <nav>
                         <ul class="side_menu">
                             <li>
-                                <a href="${pageContext.request.contextPath}/Followers">Followers</a>
+                                <a href="${pageContext.request.contextPath}/Followers">${followers}</a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.contextPath}/Following">FOLLOWING</a>
+                                <a href="${pageContext.request.contextPath}/Following">${following}</a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.contextPath}/BlackList">BlackList</a>
+                                <a href="${pageContext.request.contextPath}/BlackList">${blackList}</a>
                             </li>
+                            <%--<li>--%>
+                                <%--<a href="${pageContext.request.contextPath}/user/messages.jsp">${audio}</a>--%>
+                            <%--</li>--%>
                             <li>
-                                <a href="${pageContext.request.contextPath}/user/messages.html">${messages}</a>
-                            </li>
-                            <li>
-                                <a href="${pageContext.request.contextPath}/user/messages.jsp">${music}</a>
-                            </li>
-                            <li>
-                                <a href="${pageContext.request.contextPath}/Settings">Редактировать профиль</a>
+                                <a href="${pageContext.request.contextPath}/Settings">${settings}</a>
                             </li>
                             <li>
                                 <a href="/SignOut">${signOut}</a>

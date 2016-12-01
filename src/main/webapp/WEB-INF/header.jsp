@@ -6,7 +6,10 @@
 <head>
     <title>header</title>
     <%--<link rel="stylesheet" href="/css/styles.css" type="text/css">--%>
-
+    <fmt:setLocale value="${sessionScope.lang}"/>
+    <fmt:setBundle basename="localization.message" var="loc"/>
+    <fmt:message bundle="${loc}" key="search" var="search"/>
+    <fmt:message bundle="${loc}" key="search.msg" var="searchMsg"/>
 </head>
 <body>
 <header>
@@ -14,9 +17,9 @@
         <a href="/Location">${sessionScope.lang}</a>
     </div>
     <div class="lang">
-        <form class="search-form" action="/Search" method="get">
-            <input type="text" class="search-input" placeholder="GET ALL" name="mask">
-            <button class="search-button" type="submit">SEARCH</button>
+        <form class="search-form" action="/Search" method="post">
+            <input type="text" class="search-input" placeholder="${searchMsg}" name="mask">
+            <button class="search-button" type="submit">${search}</button>
         </form>
     </div>
     <div class="fio inline">

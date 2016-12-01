@@ -57,4 +57,3 @@ INSERT INTO Messages(id, id_user, text, id_post) VALUES (7, 4, 'comment 2', -1);
 INSERT INTO Messages(id, id_user, text, id_post) VALUES (11, 4, 'comment 3', 3);
 INSERT INTO Messages(id, id_user, text, id_post) VALUES (10, 4, 'comment 3', 4);
 INSERT INTO Messages(id, id_user, text, id_post) VALUES (9, 4, 'comment 3', 4);
-

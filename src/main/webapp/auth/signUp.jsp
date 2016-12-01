@@ -23,7 +23,7 @@
         </div>
     </header>
     <form class="form-signup" name="signUp" action="SignUp" method="post">
-        <h1>${registration}</h1>
+        <h1>${signUp}</h1>
         <div class="settings-line">
             <label class="settings-label" for="firstName">${firstName}</label>
             <input class="settings-input" id="firstName" name="firstName" pattern="[A-Za-zА-Яа-я]{2,}" required>
