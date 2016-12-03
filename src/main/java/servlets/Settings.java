@@ -34,10 +34,13 @@ public class Settings extends ServletWrapper {
         String telephone = req.getParameter("telephone");
         String info = req.getParameter("info");
         String password = req.getParameter("password");
+        int day = Integer.parseInt(req.getParameter("day"));
+        int month = Integer.parseInt(req.getParameter("month"));
+        int year = Integer.parseInt(req.getParameter("year"));
+
         LocalDate dob = null;
-        //todo раздельный ввод даты
         try {
-            dob = LocalDate.parse(req.getParameter("dob"));
+            dob = LocalDate.of(year, month, day);
         } catch (DateTimeException e) {
             log.warning("Date didn't change");
         }

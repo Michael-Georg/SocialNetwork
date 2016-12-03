@@ -14,6 +14,7 @@
     <fmt:message bundle="${loc}" key="dob" var="dob"/>
     <fmt:message bundle="${loc}" key="email" var="mail"/>
     <fmt:message bundle="${loc}" key="telephone" var="telephone"/>
+    <fmt:message bundle="${loc}" key="info" var="info"/>
     <fmt:message bundle="${loc}" key="address" var="address"/>
     <fmt:message bundle="${loc}" key="wall.add" var="add"/>
     <fmt:message bundle="${loc}" key="wall.cancel" var="cancel"/>
@@ -119,7 +120,7 @@
                                         <c:if test="${not empty user.info}">
                                             <div class="info_line">
                                                 <div class="label fl_l">
-                                                    info:
+                                                    ${info}:
                                                 </div>
                                                 <div>
                                                         ${user.info}

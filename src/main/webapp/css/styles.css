@@ -245,7 +245,7 @@ h1 {
 
 .settings-label {
     margin-left: 10px;
-    width: 100%;
+    /*width: 100%;*/
     margin-bottom: 5px;
     font-weight: 700;
     display: block;
@@ -307,11 +307,11 @@ h1 {
     word-wrap: break-word;
 }
 
-.message-form{
+.message-form {
     margin: 10px 0;
 }
 
-.post-header{
+.post-header {
     position: relative;
     border-bottom: 2px solid #f3f3f3;
     margin: 5px;
@@ -322,7 +322,7 @@ h1 {
     font-size: 16px;
 }
 
-.post-date{
+.post-date {
     color: #535353;
     font-size: 13px;
     position: absolute;
@@ -353,48 +353,49 @@ h1 {
     margin: 15px 0 0 10px;
     cursor: pointer;
 }
-.post-options{
+
+.post-options {
     float: right;
     margin: 10px;
 }
 
-.post-wrapper{
+.post-wrapper {
 }
 
-.comment_block{
+.comment_block {
     background: #fff;
     border-radius: 2px;
     box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
     width: 90%;
-    margin-bottom:10px;
+    margin-bottom: 10px;
     margin-left: 10%;
     float: left;
 }
 
-.comment-input{
+.comment-input {
     width: 95%;
     resize: vertical;
     margin: 0 auto;
     display: block;
 }
 
-.comment-form{
+.comment-form {
     margin-bottom: 10px;
     margin-left: 40px;
 }
 
-.footer{
+.footer {
     float: left;
     margin: 100px;
 }
 
-.entity-name{
+.entity-name {
     width: 90%;
     margin: 2px auto;
     text-align: center;
 }
 
-.entity-button{
+.entity-button {
     border: none;
     width: 90px;
     margin: 2px 15px;
@@ -406,14 +407,14 @@ h1 {
     cursor: pointer;
 }
 
-.result-entity{
+.result-entity {
     width: 120px;
     display: inline-block;
     font-size: 18px;
     margin: 0 0 5px 10px;
 }
 
-.entity-img{
+.entity-img {
     box-sizing: border-box;
     margin: 10px 0 0 10px;
     border: 2px solid #b1b6ff;
@@ -424,4 +425,18 @@ h1 {
 
 .result-header {
     padding: 4px;
+}
+
+.settings-input-date {
+    height: 30px;
+    background-color: #f3f3f3;
+    color: #b2b2b2;
+    border: 1px solid #e7e7e7;
+    margin: 0 0 0 10px;
+    width: 100px;
+    text-align: center;
+}
+
+.settings-date {
+    display: inline-block;
 }

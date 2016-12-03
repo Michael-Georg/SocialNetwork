@@ -11,10 +11,13 @@
     <fmt:setLocale value="${sessionScope.lang}"/>
     <fmt:setBundle basename="localization.message" var="loc"/>
     <fmt:message bundle="${loc}" key="dob" var="dob"/>
+    <fmt:message bundle="${loc}" key="day" var="day"/>
+    <fmt:message bundle="${loc}" key="month" var="month"/>
+    <fmt:message bundle="${loc}" key="year" var="year"/>
     <fmt:message bundle="${loc}" key="email" var="mail"/>
     <fmt:message bundle="${loc}" key="telephone" var="telephone"/>
     <fmt:message bundle="${loc}" key="address" var="address"/>
-    <fmt:message bundle="${loc}" key="registration" var="registration"/>
+    <fmt:message bundle="${loc}" key="settings" var="settings"/>
     <fmt:message bundle="${loc}" key="firstName" var="firstName"/>
     <fmt:message bundle="${loc}" key="laseName" var="lastName"/>
     <fmt:message bundle="${loc}" key="signUp" var="signUp"/>
@@ -23,6 +26,7 @@
     <fmt:message bundle="${loc}" key="signIn" var="signIn"/>
     <fmt:message bundle="${loc}" key="upload" var="upload"/>
     <fmt:message bundle="${loc}" key="info" var="info"/>
+    <fmt:message bundle="${loc}" key="accept" var="accept"/>
 
 </head>
 <body>
@@ -47,8 +51,9 @@
                 </div>
                 <div class="main_section">
                     <div class="page_block fl_l">
-                        <form class="form-settings" name="signUp" action="${pageContext.request.contextPath}/Settings" method="post">
-                            <h1>${registration}</h1>
+                        <form class="form-settings" name="signUp" action="${pageContext.request.contextPath}/Settings"
+                              method="post">
+                            <h1>${settings}</h1>
                             <div class="settings-line">
                                 <label class="settings-label" for="firstName">${firstName}</label>
                                 <div class="settings-input-wrap">
@@ -64,10 +69,11 @@
                                 </div>
                             </div>
                             <div class="settings-line">
-                                <label class="settings-label" for="dob">${dob}</label>
-                                <div class="settings-input-wrap">
-                                    <input class="settings-input" id="dob" type="date" name="dob"
-                                           maxlength="255" value="${person.dob}">
+                                <div class="settings-date">
+                                    <div class="settings-label">${dob}</div>
+                                    <input class="settings-input-date" type="number" name="day" min="1" max="31" placeholder="${day}">
+                                    <input class="settings-input-date" type="number" name="month" min="1" max="12" placeholder="${month}">
+                                    <input class="settings-input-date" type="number" name="year" min="1901" max="2016" placeholder="${year}">
                                 </div>
                             </div>
                             <div class="settings-line">
@@ -81,7 +87,8 @@
                                 <label class="settings-label" for="telephone">${telephone}</label>
                                 <div class="settings-input-wrap">
                                     <input class="settings-input" id="telephone" type="date"
-                                           name="telephone" pattern="[0-9+\- ]+" maxlength="20" value="${person.telephone}">
+                                           name="telephone" pattern="[0-9+\- ]+" maxlength="20"
+                                           value="${person.telephone}">
                                 </div>
                             </div>
                             <div class="settings-line">
@@ -98,7 +105,7 @@
                                 </div>
                             </div>
                             <div>
-                                <button class="setting-button" type="submit">${signUp}</button>
+                                <button class="setting-button" type="submit">${accept}</button>
                             </div>
                         </form>
                     </div>
