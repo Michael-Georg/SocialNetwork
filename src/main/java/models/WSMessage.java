@@ -13,6 +13,7 @@ public class WSMessage {
     private int id;
     private int post_id;
     private String text;
+    private String time;
 
     private int user_id;
     private String from_firstName;

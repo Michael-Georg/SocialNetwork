@@ -26,21 +26,28 @@
         <h1>${signUp}</h1>
         <div class="settings-line">
             <label class="settings-label" for="firstName">${firstName}</label>
-            <input class="settings-input" id="firstName" name="firstName" pattern="[A-Za-zА-Яа-я]{2,}" required>
+            <input class="settings-input" id="firstName" name="firstName"
+                   maxlength="30" pattern="[A-Za-zА-Яа-я]{2,}" required>
+            <span></span>
         </div>
         <div class="settings-line">
             <label class="settings-label" for="lastName">${lastName}</label>
-            <input class="settings-input" id="lastName" name="lastName" pattern="[A-Za-zА-Яа-я]{2,}" required>
+            <input class="settings-input" id="lastName" name="lastName"
+                   maxlength="30" pattern="[A-Za-zА-Яа-я]{2,}" required>
+            <span></span>
         </div>
         <div class="settings-line">
             <label class="settings-label" for="email">${mail}</label>
-            <input class="settings-input" id="email"
-                   name="email" pattern="[a-zA-Z0-9_\.\+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-\.]{2,}" required>
+            <input class="settings-input" id="email" name="email"
+                   maxlength="30" pattern="[a-zA-Z0-9_\.\+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-\.]{2,}" required>
+            <span></span>
         </div>
         <div  class="settings-line">
             <label class="settings-label" for="password">${password}</label>
-            <input class="settings-input" id="password" type="password" name="password" autocomplete="off"/>
+            <input class="settings-input" id="password" type="password"
+                   maxlength="255" name="password" autocomplete="off"/>
         </div>
+        <span></span>
         <div class="errmsg settings-line">
             <c:if test='${requestScope.error eq "errEmail"}'>
                 Email already used

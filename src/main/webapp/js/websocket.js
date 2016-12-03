@@ -10,9 +10,10 @@ function onMessage(event) {
 
 function addMsg(text, postId, type) {
     const msg = {
-        // user_id: userId,
         post_id: postId,
         text: text,
+        time: '',
+        user_id: '',
         from_firstName: '',
         from_lastName: '',
         type: type
@@ -22,10 +23,20 @@ function addMsg(text, postId, type) {
 
 
 function forPrintMsg(msg, parent) {
-    const msgAuthor = document.createElement("div");
+    const msgAuthorHeader = document.createElement("div");
+    msgAuthorHeader.setAttribute("class", "post-header");
+    parent.appendChild(msgAuthorHeader);
+
+    const msgAuthor = document.createElement("a");
+    msgAuthor.setAttribute("href", "/Profile/" + msg.user_id);
     msgAuthor.setAttribute("class", "post-author");
-    msgAuthor.appendChild(document.createTextNode(msg.from_firstName + " " + msg.from_lastName));
-    parent.appendChild(msgAuthor);
+    msgAuthor.appendChild(document.createTextNode(msg.from_firstName + " " + msg.from_lastName ));
+    msgAuthorHeader.appendChild(msgAuthor);
+
+    const msgDate = document.createElement("div");
+    msgDate.setAttribute("class", "post-date");
+    msgDate.appendChild(document.createTextNode(msg.time));
+    msgAuthorHeader.appendChild(msgDate);
 
     const msgText = document.createElement("div");
     msgText.setAttribute("class", "post-text");
@@ -38,7 +49,6 @@ function printMsg(msg) {
     if (msg.post_id === -1) {
         const content = document.getElementById("content");
         const mD = document.createElement("div");
-        // mD.setAttribute("id", msg.id);
         mD.setAttribute("class", "post-wrapper");
 
         const post = document.createElement("div");
@@ -95,7 +105,6 @@ function startFormSubmit() {
 
 function formSubmit(form, postId) {
     const text = form.elements["text"].value;
-    // const userId = document.getElementById("msgForm").elements["userId"].value;
     form.reset();
     addMsg(text, postId, "add");
 }

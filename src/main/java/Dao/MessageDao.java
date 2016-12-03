@@ -6,6 +6,7 @@ import models.Message;
 import models.WSMessage;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -15,14 +16,15 @@ import java.util.*;
 
 @Slf4j
 public class MessageDao {
-    private static final String SQL = "SELECT id, id_user, id_post, text FROM Messages WHERE id_user = ? AND id_post = -1";
-    private static final String SQL3 = "SELECT id, id_user, id_post, text FROM Messages WHERE id_post = ?";
+    private static final String SQL = "SELECT id, id_user, id_post, text, publish_time FROM Messages WHERE id_user = ? AND id_post = -1";
+    private static final String SQL3 = "SELECT id, id_user, id_post, text, publish_time FROM Messages WHERE id_post = ?";
     private static final String SQL1 = "DELETE FROM Messages WHERE id = ?";
-    private static final String SQL2 = "INSERT INTO Messages (id_user, id_post, text) VALUES (?, ?, ?)";
+    private static final String SQL2 = "INSERT INTO Messages (id_user, id_post, text, publish_time) VALUES (?, ?, ?, ?)";
     private ConnectionPool connectionPool;
 
     /**
-     *Initialize instance of this class with given pool of open connections to DB
+     * Initialize instance of this class with given pool of open connections to DB
+     *
      * @param pool create  in {@link servlets.listeners.Init}
      */
     public MessageDao(ConnectionPool pool) {
@@ -31,6 +33,7 @@ public class MessageDao {
 
     /**
      * Retrieves {@link Message} from database with id_post = -1.
+     *
      * @param userId ID of user who create the messages
      * @return Set<Message> with Messages (Posts)
      */
@@ -45,7 +48,7 @@ public class MessageDao {
                     result.add(readMessage(rs));
             }
         } catch (SQLException e) {
-            log.error("Failed searching Messages",e);
+            log.error("Failed searching Messages", e);
             return Collections.emptySet();
         }
         return result;
@@ -53,6 +56,7 @@ public class MessageDao {
 
     /**
      * Retrieves {@link Message}(Comments) from database with postId.
+     *
      * @param postId ID of message(Post) which comments searching
      * @return Set<Message> with Messages(Comments)
      */
@@ -67,22 +71,26 @@ public class MessageDao {
                     result.add(readMessage(rs));
             }
         } catch (SQLException e) {
-            log.error("Failed searching Messages",e);
+            log.error("Failed searching Messages", e);
             return Collections.emptySet();
         }
         return result;
     }
+
     /**
      * Create new {@link Message} in database.
+     *
      * @param message {@link WSMessage} JSON message model for WebSocket chanel
      * @return Message added to database
      */
     public Message add(WSMessage message) {
+        LocalDateTime time = LocalDateTime.now();
         try (Connection con = connectionPool.get();
              PreparedStatement ps = con.prepareStatement(SQL2, Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, message.getUser_id());
             ps.setInt(2, message.getPost_id());
             ps.setString(3, message.getText());
+            ps.setTimestamp(4, Timestamp.valueOf(time));
             ps.executeUpdate();
             try (ResultSet rs = ps.getGeneratedKeys()) {
                 if (rs.next())
@@ -91,6 +99,7 @@ public class MessageDao {
                             .post_id(message.getPost_id())
                             .text(message.getText())
                             .user_id(message.getUser_id())
+                            .time(time)
                             .build();
             }
         } catch (SQLException e) {
@@ -102,8 +111,10 @@ public class MessageDao {
     /**
      * Delete from database Message with ID equal to ID of given one
      * it was assigned. Also deletes it from cache.
+     *
      * @param msgId id message to delete
      */
+    @SuppressWarnings("unused")
     public void remove(int msgId) {
         try (Connection con = connectionPool.get();
              PreparedStatement ps = con.prepareStatement(SQL1)) {
@@ -117,6 +128,7 @@ public class MessageDao {
     /**
      * Read one note from ResultSet and create new Message
      * Return Optional<Person> with Person or with Optional.empty()
+     *
      * @param rs note with Message data
      * @return {@link Message}
      * @throws SQLException if can't read note
@@ -127,6 +139,8 @@ public class MessageDao {
                 .id(rs.getInt("id"))
                 .user_id(rs.getInt("id_user"))
                 .post_id(rs.getInt("id_post"))
+                .time(Optional.ofNullable(rs.getTimestamp("publish_time"))
+                        .map(Timestamp::toLocalDateTime).orElse(null))
                 .build();
     }
 }

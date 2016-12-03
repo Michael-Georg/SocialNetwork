@@ -7,7 +7,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css" type="text/css">
-    <title>setings</title>
+    <title>settings</title>
     <fmt:setLocale value="${sessionScope.lang}"/>
     <fmt:setBundle basename="localization.message" var="loc"/>
     <fmt:message bundle="${loc}" key="dob" var="dob"/>
@@ -53,40 +53,42 @@
                                 <label class="settings-label" for="firstName">${firstName}</label>
                                 <div class="settings-input-wrap">
                                     <input class="settings-input" id="firstName" name="firstName"
-                                           pattern="[A-Za-zА-Яа-я]{2,}" value="${person.firstName}">
+                                           pattern="[A-Za-zА-Яа-я]{2,}" maxlength="30" value="${person.firstName}">
                                 </div>
                             </div>
                             <div class="settings-line">
                                 <label class="settings-label" for="lastName">${lastName}</label>
                                 <div class="settings-input-wrap">
                                     <input id="lastName" name="lastName" class="settings-input"
-                                           pattern="[A-Za-zА-Яа-я]{2,}" value="${person.lastName}">
+                                           pattern="[A-Za-zА-Яа-я]{2,}" maxlength="30" value="${person.lastName}">
                                 </div>
                             </div>
                             <div class="settings-line">
                                 <label class="settings-label" for="dob">${dob}</label>
                                 <div class="settings-input-wrap">
-                                    <input class="settings-input" id="dob" type="date" name="dob" value="${person.dob}">
+                                    <input class="settings-input" id="dob" type="date" name="dob"
+                                           maxlength="255" value="${person.dob}">
                                 </div>
                             </div>
                             <div class="settings-line">
                                 <label class="settings-label" for="address">${address}</label>
                                 <div class="settings-input-wrap">
                                     <input class="settings-input" id="address" type="date"
-                                           name="address" value="${person.address}">
+                                           name="address" maxlength="255" value="${person.address}">
                                 </div>
                             </div>
                             <div class="settings-line">
                                 <label class="settings-label" for="telephone">${telephone}</label>
                                 <div class="settings-input-wrap">
                                     <input class="settings-input" id="telephone" type="date"
-                                           name="telephone" pattern="[0-9+\- ]+" value="${person.telephone}">
+                                           name="telephone" pattern="[0-9+\- ]+" maxlength="20" value="${person.telephone}">
                                 </div>
                             </div>
                             <div class="settings-line">
                                 <label class="settings-label" for="password">${password}</label>
                                 <div class="settings-input-wrap">
-                                    <input id="password" type="password" name="password" class="settings-input">
+                                    <input id="password" type="password" name="password"
+                                           maxlength="255" class="settings-input">
                                 </div>
                             </div>
                             <div class="settings-line">

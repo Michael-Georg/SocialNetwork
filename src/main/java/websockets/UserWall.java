@@ -4,7 +4,7 @@ import Dao.MessageDao;
 import Dao.PersonDao;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 import models.Message;
 import models.Person;
 import models.WSMessage;
@@ -14,6 +14,7 @@ import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
@@ -21,7 +22,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import static servlets.ServletConst.*;
 
-@Log
+@Slf4j
 @SuppressWarnings("unused")
 @ServerEndpoint(value = "/Profile/{id}", configurator = HttpSessionConfig.class)
 public class UserWall {
@@ -67,6 +68,7 @@ public class UserWall {
 
     @OnMessage
     public void onMessage(String json, Session session) {
+        log.info("JSON JSON : {}", json);
         ObjectMapper mapper = new ObjectMapper();
         try {
             WSMessage msg = mapper.readValue(json, WSMessage.class);
@@ -101,6 +103,7 @@ public class UserWall {
                 .text(msg.getText())
                 .user_id(id)
                 .post_id(msg.getPost_id())
+                .time(msg.getTime().format(DateTimeFormatter.ofPattern("dd.MM.YYYY HH:mm")))
                 .from_firstName(user.getFirstName())
                 .from_lastName(user.getLastName())
                 .type(type)
