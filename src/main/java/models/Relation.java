@@ -3,10 +3,10 @@ package models;
 import lombok.AllArgsConstructor;
 import lombok.Value;
 
-/*
-    @param status block(1)  - user (user_id) can't follow smbdy (friend_id current user)
-           status follow(2) - user (user_id current user) follow smbdy
-
+/**
+ * Immutable class representing Relation between two users of social network.
+ * Field 'status' means : block(1) - user (user_id) can't follow another user (friend_id (authorized user))
+ *                        follow(2) - user (user_id (authorized user)) follow another user
  */
 
 @Value

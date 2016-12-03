@@ -25,7 +25,6 @@ public class Search extends ServletWrapper {
         HttpSession session = req.getSession();
         String mask = req.getParameter("mask");
         String url = req.getRequestURI();
-        //todo поиск по всем данным
         if (mask == null || mask.equals("")) {
             req.setAttribute(SEARCH_RESULT, personDao.getAll());
         } else if (isNumber(mask)) {
@@ -41,7 +40,7 @@ public class Search extends ServletWrapper {
 
         session.setAttribute(URL, url);
         log.info("URL : {}", url);
-        req.getRequestDispatcher("/user/results.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/user/results.jsp").forward(req, resp);
 
 
     }

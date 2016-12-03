@@ -10,7 +10,11 @@
     <!--<welcome-file-list>-->
         <!--<welcome-file>/user/profile.jsp</welcome-file>-->
     <!--</welcome-file-list>-->
-    <!--<error-page>-->
-        <!--<location>/auth/error.html</location>-->
-    <!--</error-page>-->
+    <error-page>
+        <location>/WEB-INF/auth/error.html</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/auth/error.html</location>
+    </error-page>
 </web-app>

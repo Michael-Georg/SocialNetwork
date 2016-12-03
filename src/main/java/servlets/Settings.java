@@ -23,7 +23,7 @@ public class Settings extends ServletWrapper {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         log.info(() -> " - > settings.jsp");
         req.getSession().setAttribute(URL, "/Settings");
-        req.getRequestDispatcher("/user/settings.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/user/settings.jsp").forward(req, resp);
     }
 
     @Override

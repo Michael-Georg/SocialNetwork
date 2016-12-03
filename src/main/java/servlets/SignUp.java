@@ -22,7 +22,7 @@ public class SignUp extends ServletWrapper {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         log.info(() -> " doGet");
         req.getSession().setAttribute(URL, "/SignUp");
-        req.getRequestDispatcher("/auth/signUp.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/auth/signUp.jsp").forward(req, resp);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class SignUp extends ServletWrapper {
         String email = req.getParameter("email");
         if (personDao.getByEmail(email).isPresent()) {
             req.setAttribute(ERROR, "errEmail");
-            req.getRequestDispatcher("/auth/signUp.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/auth/signUp.jsp").forward(req, resp);
             return ;
         }
 
@@ -52,7 +52,7 @@ public class SignUp extends ServletWrapper {
 
             resp.sendRedirect("/Profile/" + person.get().getId());
         } else
-            req.getRequestDispatcher("/auth/error.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/auth/error.jsp").forward(req, resp);
 
     }
 }

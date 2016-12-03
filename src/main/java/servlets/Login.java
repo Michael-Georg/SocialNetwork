@@ -28,7 +28,7 @@ public class Login extends ServletWrapper {
             session.setAttribute(URL, "/Login");
             if (session.getAttribute(LANG) == null)
                 session.setAttribute(LANG, "en");
-            req.getRequestDispatcher("/auth/login.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/auth/login.jsp").forward(req, resp);
         }
     }
 
@@ -45,6 +45,6 @@ public class Login extends ServletWrapper {
             }
 //        }
         req.setAttribute(ERROR, "err");
-        req.getRequestDispatcher("/auth/login.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/auth/login.jsp").forward(req, resp);
     }
 }

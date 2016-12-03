@@ -20,7 +20,7 @@ public class Upload extends ServletWrapper{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/user/upload.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/user/upload.jsp").forward(req, resp);
         log.info("forwarding to upload.jsp");
     }
     //TODO Need to create external storage for content

@@ -33,7 +33,7 @@ public class Profile extends ServletWrapper {
         Matcher m = p.matcher(url.trim());
 
         if (!m.matches())
-            resp.sendRedirect("/auth/error");
+            resp.sendRedirect("/WEB-INF/auth/error");
 
         Optional<Person> user = personDao
                 .getEntity(Integer.parseInt(m.group(1)));
@@ -44,9 +44,9 @@ public class Profile extends ServletWrapper {
             int user_id = user.get().getId();
             log.info("person id - " + person_id + "; requested id - " + user_id);
             req.setAttribute(FRIEND_STATUS, relationDao.getRelation(person_id, user_id));
-            req.getRequestDispatcher("/user/profile.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/user/profile.jsp").forward(req, resp);
         } else {
-            resp.sendRedirect("/auth/error/");
+            resp.sendRedirect("/WEB-INF/auth/error/");
         }
     }
 }

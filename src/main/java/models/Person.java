@@ -4,6 +4,12 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
+
+/**
+ * Class representing User of social network.
+ * Contains fields for all attributes of user
+ * Instance of class can be create by nested PersonBuilder class.
+ */
 @Data
 @Builder
 public class Person {

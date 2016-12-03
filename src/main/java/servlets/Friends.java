@@ -41,6 +41,6 @@ public class Friends extends ServletWrapper {
             }
         }
         session.setAttribute(URL, url);
-        req.getRequestDispatcher("/user/results.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/user/results.jsp").forward(req, resp);
     }
 }

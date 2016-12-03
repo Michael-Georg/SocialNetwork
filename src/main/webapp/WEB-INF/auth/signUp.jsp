@@ -4,7 +4,7 @@
 <html>
 <head>
     <title>Sign up</title>
-    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css" type="text/css">
     <fmt:setLocale value="${sessionScope.lang}"/>
     <fmt:setBundle basename="localization.message" var="loc"/>
     <fmt:message bundle="${loc}" key="registration" var="registration"/>
@@ -19,7 +19,7 @@
 <div id="wrapper">
     <header>
         <div class="lang">
-            <a href="/Location">${sessionScope.lang}</a>
+            <a href="${pageContext.request.contextPath}/Location">${sessionScope.lang}</a>
         </div>
     </header>
     <form class="form-signup" name="signUp" action="SignUp" method="post">
