@@ -3,7 +3,6 @@ import Dao.PersonDao;
 import Dao.RelationDao;
 import Dao.common.ConnectionPool;
 import models.Person;
-import models.Status;
 import models.WSMessage;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -14,7 +13,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDate;
 
-import static models.Status.BLOCK;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -24,6 +22,7 @@ public class DataBaseTests {
     private static PersonDao personDao;
     private static RelationDao relationDao;
     private static MessageDao messageDao;
+
     @BeforeClass
     public static void init() throws Exception {
         pool = ConnectionPool.create("src\\main\\resources\\db.properties");
@@ -58,7 +57,7 @@ public class DataBaseTests {
                 .email(email)
                 .password("1")
                 .build());
-        Person person = personDao.getByEmail("Alex@Alex.com").get();
+        Person person = personDao.getByEmail("Alex@Alex.com").orElse(null);
         assertThat(person.getEmail(), is(equalTo(email)));
     }
 
@@ -100,13 +99,6 @@ public class DataBaseTests {
         System.out.println("followers" + relationDao.followersList(1));
     }
 
-//    @Test
-//    public void addRemoveFriend() throws Exception {
-//        Relation rel = new Relation(1, 2, BLOCK);
-//        relationDao.add(rel);
-//       assertThat(relationDao.followingList(1).get(0).getId(), is(4));
-//
-//    }
 
     @Test
     public void msgGetAll() throws Exception {
@@ -117,11 +109,5 @@ public class DataBaseTests {
                 .build();
         messageDao.add(msg);
         System.out.println(messageDao.getAllComments(1));
-    }
-
-    @Test
-    public void relations() throws Exception {
-        Status ignore = BLOCK;
-        System.out.println(ignore.getType());
     }
 }

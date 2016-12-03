@@ -8,8 +8,14 @@ import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+
+/**
+ * Data Access Object for work with {@link models.Person}.
+ * Include methods to create, update and some methods to read entity.
+ */
+
 @Slf4j
-public class PersonDao implements Dao<Person, Integer> {
+public class PersonDao{
     private static final String SQL = "SELECT id, first_name, last_name, email, dob, address, telephone, info FROM Person WHERE id = ?";
     private static final String SQL1 = "SELECT id, first_name, last_name, email, password, dob, address, telephone, info FROM Person WHERE email = ?";
     private static final String SQL2 = "INSERT INTO Person (first_name, last_name, email, password) VALUES (?, ?, ?, ?)";
@@ -17,11 +23,17 @@ public class PersonDao implements Dao<Person, Integer> {
     private static final String SQL4 = "SELECT * FROM Person";
     private ConnectionPool connectionPool;
 
+    /**
+     *Initialize instance of this class with given pool of open connections to DB
+     * @param connectionPool create  in {@link servlets.listeners.Init}
+     */
     public PersonDao(ConnectionPool connectionPool) {
         this.connectionPool = connectionPool;
     }
 
-    @Override
+    /**
+     * Return all {@link Person} from database
+     */
     public List<Person> getAll() {
         List<Person> result = new LinkedList<>();
         try (Connection con = connectionPool.get();
@@ -31,11 +43,14 @@ public class PersonDao implements Dao<Person, Integer> {
                 result.add(readPerson(rs).orElse(null));
             }
         } catch (SQLException e) {
-            log.error("get all error");        }
+            log.error("Failed get all");        }
         return result;
     }
 
-    @Override
+    /**
+     * Retrieves {@link Person} from database. Return Optional<Person> with Person or with Optional.empty()
+     * @param id ID of user to retrieve
+     */
     public Optional<Person> getEntity(Integer id) {
         try (Connection con = connectionPool.get();
              PreparedStatement prepStat = con.prepareStatement(SQL)) {
@@ -44,10 +59,15 @@ public class PersonDao implements Dao<Person, Integer> {
                 return rs.next() ? readPerson(rs) : Optional.empty();
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            log.error("Failed searching Person by id", e);
+            return Optional.empty();
         }
     }
 
+    /**
+     * Retrieves {@link Person} from database. Return Optional<Person> with Person or with Optional.empty()
+     * @param email email of user to retrieve
+     */
     public Optional<Person> getByEmail(String email) {
         try (Connection con = connectionPool.get();
              PreparedStatement prepStat = con.prepareStatement(SQL1)) {
@@ -56,10 +76,17 @@ public class PersonDao implements Dao<Person, Integer> {
                 return rs.next() ? readPerson(rs) : Optional.empty();
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            log.error("Failed searching Person bi email", e);
+            return Optional.empty();
         }
     }
 
+    /**
+     *
+     * @param email user email. Can't be duplicated in BD
+     * @param pass user password
+     * @return Optional<Person>
+     */
     public Optional<Person> getByEmailAndPass(String email, String pass) {
         try (Connection con = connectionPool.get();
              PreparedStatement prepStat = con.prepareStatement(SQL1)) {
@@ -71,12 +98,14 @@ public class PersonDao implements Dao<Person, Integer> {
 
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            log.error("Failed searching Person by email,id", e);
+            return Optional.empty();
         }
     }
 
-
-    @Override
+    /**
+     * Add new {@link Person} to database.
+     */
     public void create(Person entity) {
         try (Connection con = connectionPool.get();
              PreparedStatement ps = con.prepareStatement(SQL2)) {
@@ -86,11 +115,13 @@ public class PersonDao implements Dao<Person, Integer> {
             ps.setString(4, entity.getPassword());
             ps.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException();
+            log.error("Failed creation Person", e);
         }
     }
 
-    @Override
+    /**
+     * Update information about {@link Person} in database.
+     */
     public void update(Person entity) {
         try (Connection con = connectionPool.get();
              PreparedStatement ps = con.prepareStatement(SQL3)) {
@@ -104,15 +135,17 @@ public class PersonDao implements Dao<Person, Integer> {
             ps.setString(8, entity.getEmail());
             ps.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException();
+            log.error("Failed update person", e);
         }
     }
 
-
-    @Override
-    public void delete(Integer id) {
-
-    }
+    /**
+     * Read one note from ResultSet and create new Person
+     * Return Optional<Person> with Person or with Optional.empty()
+     * @param rs note with Person data
+     * @return Optional<Person>
+     * @throws SQLException if can't read note
+     */
 
     private Optional<Person> readPerson(ResultSet rs) throws SQLException {
         return Optional.ofNullable(Person.builder()
@@ -126,6 +159,5 @@ public class PersonDao implements Dao<Person, Integer> {
                 .id(rs.getInt("id"))
                 .info(rs.getString("info"))
                 .build());
-
     }
 }

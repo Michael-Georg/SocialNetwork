@@ -108,7 +108,7 @@ function createForm(postId) {
     i.setAttribute('class', "comment-input");
     i.setAttribute('name', "text");
     i.setAttribute('maxlength', '255');
-    i.autofocus;
+    i.focus();
     f.appendChild(i);
     f.appendChild(addButton(document.body.dataset.smsg, (evt) => {
         formSubmit(document.getElementById(postId).getElementsByTagName("form")[0], f.parentNode.id);
@@ -127,16 +127,9 @@ function hideComments(postId) {
     element.style.display = "none";
 }
 
-// function getComments(postId) {
-//     const commentWrap = document.getElementById(postId);
-//     commentWrap.setAttribute('value', '1');
-//     addMsg('', 1, postId, "comments");
-//     commentWrap.parentNode.getElementsByTagName("button")[0].style.display = "none";
-//     createForm(postId);
-// }
-
 function showForm() {
-    document.getElementById("msgForm").style.display = '';
+    const form = document.getElementById("msgForm");
+    form.style.display = '';
     document.getElementById("msg_start_button").style.display = "none";
 }
 

@@ -18,6 +18,7 @@ public class IterateList extends TagSupport {
     @Setter
     private String buttonName;
 
+    @SuppressWarnings("unchecked")
     @Override
     public int doStartTag() {
         List<Person> list = (List<Person>) pageContext.findAttribute(collection);
@@ -39,7 +40,7 @@ public class IterateList extends TagSupport {
                         out.print("<button class=\"entity-button\" name=\"status\"" +
                                 " value=\"");
                         switch (buttonType) {
-                            case "blocked": {
+                            case "blackList": {
                                 out.print("-1");
                                 break;
                             }

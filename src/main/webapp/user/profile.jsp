@@ -137,7 +137,7 @@
                                             <input type="hidden" name="userId" value="${person.id}">
                                             <label for="text"></label><textarea name="text" id="text"
                                                                                 class="settings-info"
-                                                                                maxlength="255" autofocus></textarea>
+                                                                                maxlength="255"></textarea>
                                             <input type="button" class="post-button" value="${add}"
                                                    onclick=startFormSubmit()>
                                             <input type="reset" class="post-button" value="${cancel}"

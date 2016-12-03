@@ -15,14 +15,11 @@ import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static servlets.ServletConst.MESSAGE_DAO;
-import static servlets.ServletConst.PERSON;
-import static servlets.ServletConst.PERSON_DAO;
+import static servlets.ServletConst.*;
 
 @Log
 @SuppressWarnings("unused")
@@ -48,8 +45,8 @@ public class UserWall {
         sessionMap.get(this.id).add(session);
         ObjectMapper mapper = new ObjectMapper();
         try {
-            Set<Message> list = messageDao.getAllPosts(this.id);
-            for (Message msg : list) {
+            Set<Message> set = messageDao.getAllPosts(this.id);
+            for (Message msg : set) {
                 session.getBasicRemote().sendText(createJSON(msg, "post"));
             }
         } catch (IOException e) {
@@ -84,8 +81,8 @@ public class UserWall {
                     break;
                 }
                 case "comments": {
-                    List<Message> list = messageDao.getAllComments(msg.getPost_id());
-                    for (Message message : list)
+                    Set<Message> set = messageDao.getAllComments(msg.getPost_id());
+                    for (Message message : set)
                         session.getBasicRemote().sendText(createJSON(message, "post"));
                     break;
                 }
@@ -98,7 +95,7 @@ public class UserWall {
     @SneakyThrows
     private String createJSON(Message msg, String type) {
         ObjectMapper mapper = new ObjectMapper();
-        Person user = personDao.getEntity(msg.getUser_id()).get();
+        Person user = personDao.getEntity(msg.getUser_id()).orElse(null);
         return mapper.writeValueAsString(WSMessage.builder()
                 .id(msg.getId())
                 .text(msg.getText())

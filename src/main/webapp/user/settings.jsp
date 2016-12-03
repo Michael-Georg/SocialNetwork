@@ -6,7 +6,7 @@
 
 <html>
 <head>
-    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css" type="text/css">
     <title>setings</title>
     <fmt:setLocale value="${sessionScope.lang}"/>
     <fmt:setBundle basename="localization.message" var="loc"/>
@@ -39,7 +39,7 @@
                                 <img class="page_avatar"
                                      src='/images/${person.id}.jpg'/>
                             </div>
-                            <form class="only_button" action="/Upload" method="get">
+                            <form class="only_button" action="${pageContext.request.contextPath}/Upload" method="get">
                                 <button class="avatar_button" type="submit">${upload}</button>
                             </form>
                         </div>
@@ -47,7 +47,7 @@
                 </div>
                 <div class="main_section">
                     <div class="page_block fl_l">
-                        <form class="form-settings" name="signUp" action="/Settings" method="post">
+                        <form class="form-settings" name="signUp" action="${pageContext.request.contextPath}/Settings" method="post">
                             <h1>${registration}</h1>
                             <div class="settings-line">
                                 <label class="settings-label" for="firstName">${firstName}</label>
@@ -86,7 +86,7 @@
                             <div class="settings-line">
                                 <label class="settings-label" for="password">${password}</label>
                                 <div class="settings-input-wrap">
-                                    <input id="password" name="password" class="settings-input">
+                                    <input id="password" type="password" name="password" class="settings-input">
                                 </div>
                             </div>
                             <div class="settings-line">
