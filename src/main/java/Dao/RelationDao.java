@@ -114,7 +114,7 @@ public class RelationDao {
 
     /**
      * @param userId authorized user id
-     * @return  List<Person> {@link Person} which follow to authorized user.
+     * @return  List(Person) {@link Person} which follow to authorized user.
      */
     public List<Person> followersList(int userId) {
         String SQL = "SELECT first_name, last_name, id FROM Person WHERE id IN " +
@@ -124,7 +124,7 @@ public class RelationDao {
 
     /**
      * @param userId authorized user id
-     * @return  List<Person> {@link Person} which blocked by authorized user.
+     * @return  List(Person) {@link Person} which blocked by authorized user.
      */
     public List<Person> ignoreList(int userId) {
 
@@ -136,7 +136,7 @@ public class RelationDao {
 
     /**
      * @param userId authorized user id
-     * @return  List<Person> {@link Person} which following by authorized user.
+     * @return  List(Person) {@link Person} which following by authorized user.
      */
     public List<Person> followingList(int userId) {
         String SQL = "SELECT first_name, last_name, id FROM Person WHERE id IN " +

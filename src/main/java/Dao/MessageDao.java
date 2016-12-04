@@ -35,7 +35,7 @@ public class MessageDao {
      * Retrieves {@link Message} from database with id_post = -1.
      *
      * @param userId ID of user who create the messages
-     * @return Set<Message> with Messages (Posts)
+     * @return Set(Message) with Messages (Posts)
      */
     public Set<Message> getAllPosts(int userId) {
         Set<Message> result = new TreeSet<>((o1, o2) ->
@@ -58,7 +58,7 @@ public class MessageDao {
      * Retrieves {@link Message}(Comments) from database with postId.
      *
      * @param postId ID of message(Post) which comments searching
-     * @return Set<Message> with Messages(Comments)
+     * @return Set(Message) with Messages(Comments)
      */
     public Set<Message> getAllComments(int postId) {
         Set<Message> result = new TreeSet<>((o1, o2) ->

@@ -51,23 +51,22 @@ public class Settings extends ServletWrapper {
         }
 
         HttpSession session = req.getSession();
-        Integer id = ((Person) session.getAttribute(PERSON)).getId();
-        String email = ((Person) session.getAttribute(PERSON)).getEmail();
+        Person person = (Person) session.getAttribute(PERSON);
 
-        Person person = Person.builder()
-                .id(id)
-                .firstName(firstName)
-                .lastName(lastName)
+        Person personNew = Person.builder()
+                .id(person.getId())
+                .firstName(firstName.equals("") ? person.getFirstName() : firstName)
+                .lastName(lastName.equals("") ? person.getLastName() : lastName)
                 .telephone(telephone)
-                .email(email)
+                .email(person.getEmail())
                 .dob(dob)
                 .address(address)
                 .info(info)
                 .build();
-        session.setAttribute(PERSON, person);
+        session.setAttribute(PERSON, personNew);
         if (!password.equals(""))
-            person.setPassword(password);
-        personDao.update(person);
-        resp.sendRedirect("/Profile/" + id);
+            personNew.setPassword(password);
+        personDao.update(personNew);
+        resp.sendRedirect("/Profile/" + person.getId());
     }
 }

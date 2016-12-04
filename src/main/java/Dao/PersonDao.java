@@ -32,7 +32,7 @@ public class PersonDao {
     }
 
     /**
-     * Return all {@link Person} from database
+     * @return all {@link Person} from database
      */
     public List<Person> getAll() {
         List<Person> result = new LinkedList<>();
@@ -49,9 +49,10 @@ public class PersonDao {
     }
 
     /**
-     * Retrieves {@link Person} from database. Return Optional<Person> with Person or with Optional.empty()
+     * Retrieves {@link Person} from database. Return Optional(Person) with Person or with Optional.empty()
      *
      * @param id ID of user to retrieve
+     * @return Optional(Person)
      */
     public Optional<Person> getEntity(Integer id) {
         try (Connection con = connectionPool.get();
@@ -67,9 +68,10 @@ public class PersonDao {
     }
 
     /**
-     * Retrieves {@link Person} from database. Return Optional<Person> with Person or with Optional.empty()
+     * Retrieves {@link Person} from database. Return Optional(Person) with Person or with Optional.empty()
      *
      * @param email email of user to retrieve
+     * @return Optional(Person)
      */
     public Optional<Person> getByEmail(String email) {
         try (Connection con = connectionPool.get();
@@ -87,7 +89,7 @@ public class PersonDao {
     /**
      * @param email user email. Can't be duplicated in BD
      * @param pass  user password
-     * @return Optional<Person>
+     * @return Optional(Person)
      */
     public Optional<Person> getByEmailAndPass(String email, String pass) {
         try (Connection con = connectionPool.get();
@@ -107,6 +109,7 @@ public class PersonDao {
 
     /**
      * Add new {@link Person} to database.
+     * @param entity user profile for insert to database
      */
     public void create(Person entity) {
         try (Connection con = connectionPool.get();
@@ -123,6 +126,7 @@ public class PersonDao {
 
     /**
      * Update information about {@link Person} in database.
+     * @param entity Information about user for update in database
      */
     public void update(Person entity) {
         final String SQL3 = "UPDATE Person SET first_name = ?, last_name = ?, dob = ?, address = ?, telephone = ?," +
@@ -139,7 +143,7 @@ public class PersonDao {
             ps.setString(6, entity.getInfo());
             if (entity.getPassword() == null) {
                 ps.setString(7, entity.getEmail());
-            }else{
+            } else {
                 ps.setString(7, entity.getPassword());
                 ps.setString(8, entity.getEmail());
             }
