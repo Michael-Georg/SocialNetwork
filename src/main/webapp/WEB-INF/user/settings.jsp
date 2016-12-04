@@ -27,7 +27,6 @@
     <fmt:message bundle="${loc}" key="upload" var="upload"/>
     <fmt:message bundle="${loc}" key="info" var="info"/>
     <fmt:message bundle="${loc}" key="accept" var="accept"/>
-
 </head>
 <body>
 <div id="wrapper">
@@ -58,37 +57,42 @@
                                 <label class="settings-label" for="firstName">${firstName}</label>
                                 <div class="settings-input-wrap">
                                     <input class="settings-input" id="firstName" name="firstName"
-                                           pattern="[A-Za-zА-Яа-я]{2,}" maxlength="30" value="${person.firstName}">
+                                           pattern="[A-Za-zА-Яа-я]{2,}" maxlength="20" value="${person.firstName}">
                                 </div>
                             </div>
                             <div class="settings-line">
                                 <label class="settings-label" for="lastName">${lastName}</label>
                                 <div class="settings-input-wrap">
                                     <input id="lastName" name="lastName" class="settings-input"
-                                           pattern="[A-Za-zА-Яа-я]{2,}" maxlength="30" value="${person.lastName}">
+                                           pattern="[A-Za-zА-Яа-я]{2,}" maxlength="20" value="${person.lastName}">
                                 </div>
                             </div>
                             <div class="settings-line">
                                 <div class="settings-date">
                                     <div class="settings-label">${dob}</div>
-                                    <input class="settings-input-date" type="number" name="day" min="1" max="31" placeholder="${day}">
-                                    <input class="settings-input-date" type="number" name="month" min="1" max="12" placeholder="${month}">
-                                    <input class="settings-input-date" type="number" name="year" min="1901" max="2016" placeholder="${year}">
+                                    <label class="settings-label-date" for="day">${day}:</label>
+                                    <input class="settings-input-date" type="number" name="day" min="1" max="31"
+                                           value="${requestScope.day}" id="day">
+                                    <label class="settings-label-date" for="month">${month}:</label>
+                                    <input class="settings-input-date" type="number" name="month" min="1" max="12"
+                                           value="${requestScope.month}" id="month">
+                                    <label class="settings-label-date" for="year">${year}:</label>
+                                    <input class="settings-input-date" type="number" name="year" min="1901" max="2016"
+                                           value="${requestScope.year}" id="year">
                                 </div>
                             </div>
                             <div class="settings-line">
                                 <label class="settings-label" for="address">${address}</label>
                                 <div class="settings-input-wrap">
-                                    <input class="settings-input" id="address" type="date"
+                                    <input class="settings-input" id="address"
                                            name="address" maxlength="255" value="${person.address}">
                                 </div>
                             </div>
                             <div class="settings-line">
                                 <label class="settings-label" for="telephone">${telephone}</label>
                                 <div class="settings-input-wrap">
-                                    <input class="settings-input" id="telephone" type="date"
-                                           name="telephone" pattern="[0-9+\- ]+" maxlength="20"
-                                           value="${person.telephone}">
+                                    <input class="settings-input" id="telephone" name="telephone"
+                                           pattern="[0-9+\- ]+" maxlength="20" value="${person.telephone}">
                                 </div>
                             </div>
                             <div class="settings-line">
@@ -101,7 +105,8 @@
                             <div class="settings-line">
                                 <label class="settings-label" for="info">${info}</label>
                                 <div class="settings-input-wrap">
-                                    <textarea class="settings-info" id="info" name="info" maxlength="255"></textarea>
+                                    <textarea class="settings-info" id="info" name="info"
+                                              maxlength="255">${person.info}</textarea>
                                 </div>
                             </div>
                             <div>

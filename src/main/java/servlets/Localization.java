@@ -1,6 +1,6 @@
 package servlets;
 
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,8 +12,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 import static servlets.ServletConst.URL;
-
-@Log
+@Slf4j
 @WebServlet("/Location")
 public class Localization extends HttpServlet {
 
@@ -24,9 +23,8 @@ public class Localization extends HttpServlet {
         if (lang.isPresent())
             session.setAttribute("lang",
                     lang.get().equals("ru") ? "en" : "ru");
-
         String url = (String) Optional.ofNullable(session.getAttribute(URL)).orElse("/");
-        log.info(() -> url);
+        log.info("Redirect to {}", url);
         resp.sendRedirect(url);
     }
 

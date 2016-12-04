@@ -1,7 +1,7 @@
 CREATE TABLE Person (
   id         INT PRIMARY KEY AUTO_INCREMENT,
-  first_name VARCHAR(30) NOT NULL,
-  last_name  VARCHAR(30),
+  first_name VARCHAR(20) NOT NULL,
+  last_name  VARCHAR(20),
   dob        DATE,
   email      VARCHAR(30) NOT NULL UNIQUE,
   password   VARCHAR(255) NOT NULL,
@@ -28,8 +28,8 @@ CREATE TABLE Messages (
 
 
 INSERT INTO Person (first_name, last_name, dob, email, password, address, telephone, info)
-VALUES ('Alf', 'Alf', '1980-06-15', 'ALF@ALF.ALF', '', 'Franco square, 5/1, 10',
-        '+38007654321', 'info info');
+VALUES ('Alf', 'Alf', '1980-06-15', 'ALF@ALF.ALF', '1', 'Franco square, 5/1, 10',
+        '+38007654321', 'Snowboarding');
 INSERT INTO Person (first_name, last_name, dob, email, password, address, telephone)
 VALUES ('John', 'Eglesias', '1980-06-15', 'JohnEglesias@mail.es', 'qwerty', 'Franco square, 5/1, 10',
         '+38007654321');
@@ -39,6 +39,9 @@ VALUES ('Pit', 'Eglesias', '1980-06-15', 'Pit_Eglesias@mail.es', 'qwerty', 'Fran
 INSERT INTO Person (first_name, last_name, dob, email, password, address, telephone)
 VALUES ('Aisha', 'Eglesias', '1980-06-15', 'Aisha_Eglesias@mail.es', 'qwerty', 'Franco square, 5/1, 10',
         '+38007654321');
+INSERT INTO Person (first_name, last_name, dob, email, password, address, telephone, info)
+VALUES ('Mike', 'Georg', '2000-01-01', 'Mike@mail.ru', '1', 'St.Petersburg, Vladimirskaya str., 22, 1',
+        '640-26-69', 'Argumenta ponderantur, non numerantur');
 
 INSERT INTO Relation (id_user, id_friend, status) VALUES ('1', '2', '2');
 INSERT INTO Relation (id_user, id_friend, status) VALUES ('1', '3', '1');

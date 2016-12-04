@@ -61,9 +61,10 @@ body {
 
 .fio {
     float: right;
-    font-size: 30px;
+    font-size: 20px;
     padding: 4px;
     color: #31282a;
+    margin: 5px;
 }
 
 a {
@@ -227,8 +228,20 @@ h1 {
     word-wrap: break-word;
 }
 
+pre{
+    white-space: pre-wrap;       /* css-3 */
+    white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+.info-text-wrap{
+    width: 260px;
+    display: inline-block;
+}
+
 .label {
-    width: 165px;
+    width: 120px;
 }
 
 .form-settings {
@@ -244,7 +257,7 @@ h1 {
 }
 
 .settings-label {
-    margin-left: 10px;
+    /*margin-left: 10px;*/
     /*width: 100%;*/
     margin-bottom: 5px;
     font-weight: 700;
@@ -301,10 +314,16 @@ h1 {
 }
 
 .post-text {
-    margin: 0 15px 15px;
+    margin: 0 5px 15px 15px;
     color: #535353;
     font: 16px 'Times New Roman';
-    word-wrap: break-word;
+    /*word-wrap: break-word;*/
+}
+
+.info-text{
+    margin: 0 0;
+    color: #535353;
+    font: 18px 'Times New Roman';
 }
 
 .message-form {
@@ -393,6 +412,7 @@ h1 {
     width: 90%;
     margin: 2px auto;
     text-align: center;
+    overflow: hidden;
 }
 
 .entity-button {
@@ -432,11 +452,15 @@ h1 {
     background-color: #f3f3f3;
     color: #b2b2b2;
     border: 1px solid #e7e7e7;
-    margin: 0 0 0 10px;
-    width: 100px;
+    width: 60px;
     text-align: center;
 }
 
 .settings-date {
     display: inline-block;
+}
+
+.settings-label-date{
+    height: 30px;
+    margin: 0 0 0 10px;
 }

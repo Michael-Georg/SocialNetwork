@@ -68,14 +68,12 @@ public class UserWall {
 
     @OnMessage
     public void onMessage(String json, Session session) {
-        log.info("JSON JSON : {}", json);
         ObjectMapper mapper = new ObjectMapper();
         try {
             WSMessage msg = mapper.readValue(json, WSMessage.class);
             msg.setUser_id(person.getId());
             switch (msg.getType()) {
                 case "add": {
-//                log.info("send msg to" + sessionMap.get(id).size() + " users");
                     Message message = messageDao.add(msg);
                     sessionMap.get(id).stream()
                             .map(Session::getAsyncRemote)
@@ -101,7 +99,7 @@ public class UserWall {
         return mapper.writeValueAsString(WSMessage.builder()
                 .id(msg.getId())
                 .text(msg.getText())
-                .user_id(id)
+                .user_id(user.getId())
                 .post_id(msg.getPost_id())
                 .time(msg.getTime().format(DateTimeFormatter.ofPattern("dd.MM.YYYY HH:mm")))
                 .from_firstName(user.getFirstName())

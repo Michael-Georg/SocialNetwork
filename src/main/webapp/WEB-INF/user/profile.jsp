@@ -82,7 +82,7 @@
                                                 <div class="label fl_l">
                                                         ${dob}:
                                                 </div>
-                                                <div>
+                                                <div class="info-text-wrap">
                                                         ${user.dob}
                                                 </div>
                                             </div>
@@ -92,7 +92,7 @@
                                                 <div class="label fl_l">
                                                         ${telephone}:
                                                 </div>
-                                                <div>
+                                                <div class="info-text-wrap">
                                                         ${user.telephone}
                                                 </div>
                                             </div>
@@ -102,7 +102,7 @@
                                                 <div class="label fl_l">
                                                         ${mail}:
                                                 </div>
-                                                <div>
+                                                <div class="info-text-wrap">
                                                         ${user.email}
                                                 </div>
                                             </div>
@@ -112,7 +112,7 @@
                                                 <div class="label fl_l">
                                                         ${address}:
                                                 </div>
-                                                <div>
+                                                <div class="info-text-wrap">
                                                         ${user.address}
                                                 </div>
                                             </div>
@@ -120,10 +120,10 @@
                                         <c:if test="${not empty user.info}">
                                             <div class="info_line">
                                                 <div class="label fl_l">
-                                                    ${info}:
+                                                        ${info}:
                                                 </div>
-                                                <div>
-                                                        ${user.info}
+                                                <div class="info-text-wrap">
+                                                    <pre class="info-text">${user.info}</pre>
                                                 </div>
                                             </div>
                                         </c:if>
@@ -133,7 +133,8 @@
                             <c:if test="${person.id eq user.id}">
                                 <div class="page_block fl_l">
                                     <div id="addMsg">
-                                        <button id="msg_start_button" class="msg_start" onclick=showForm()>${startMsg}</button>
+                                        <button id="msg_start_button" class="msg_start"
+                                                onclick=showForm()>${startMsg}</button>
                                         <form id="msgForm" class="message-form" action="">
                                             <input type="hidden" name="userId" value="${person.id}">
                                             <label for="text"></label><textarea name="text" id="text"

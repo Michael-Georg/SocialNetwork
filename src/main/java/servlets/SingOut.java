@@ -1,6 +1,7 @@
 package servlets;
 
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
+import models.Person;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,13 +11,14 @@ import java.io.IOException;
 
 import static servlets.ServletConst.PERSON;
 
-@Log
+@Slf4j
 @WebServlet("/SignOut")
 public class SingOut extends ServletWrapper{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Person person = (Person) req.getSession().getAttribute(PERSON);
+        log.info("Person sign out {}", person.getId());
         req.getSession().removeAttribute(PERSON);
-        log.info("Person sign out {}");
         resp.sendRedirect("/Login");
     }
 }

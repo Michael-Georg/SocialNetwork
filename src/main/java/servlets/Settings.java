@@ -1,6 +1,6 @@
 package servlets;
 
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 import models.Person;
 
 import javax.servlet.ServletException;
@@ -15,13 +15,17 @@ import java.time.LocalDate;
 import static servlets.ServletConst.PERSON;
 import static servlets.ServletConst.URL;
 
-@Log
+@Slf4j
 @WebServlet("/Settings")
 public class Settings extends ServletWrapper {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        log.info(() -> " - > settings.jsp");
+        log.info("Go to - > settings.jsp");
+        Person person = (Person) req.getSession().getAttribute(PERSON);
+        req.setAttribute("day", (person.getDob() == null) ? "" : person.getDob().getDayOfMonth());
+        req.setAttribute("month", (person.getDob() == null) ? "" : person.getDob().getMonthValue());
+        req.setAttribute("year", (person.getDob() == null) ? "" : person.getDob().getYear());
         req.getSession().setAttribute(URL, "/Settings");
         req.getRequestDispatcher("/WEB-INF/user/settings.jsp").forward(req, resp);
     }
@@ -34,22 +38,23 @@ public class Settings extends ServletWrapper {
         String telephone = req.getParameter("telephone");
         String info = req.getParameter("info");
         String password = req.getParameter("password");
-        int day = Integer.parseInt(req.getParameter("day"));
-        int month = Integer.parseInt(req.getParameter("month"));
-        int year = Integer.parseInt(req.getParameter("year"));
 
         LocalDate dob = null;
         try {
+            int day = Integer.parseInt(req.getParameter("day"));
+            int month = Integer.parseInt(req.getParameter("month"));
+            int year = Integer.parseInt(req.getParameter("year"));
+
             dob = LocalDate.of(year, month, day);
-        } catch (DateTimeException e) {
-            log.warning("Date didn't change");
+        } catch (DateTimeException | NumberFormatException e) {
+            log.error("Failed changing date", e);
         }
 
         HttpSession session = req.getSession();
         Integer id = ((Person) session.getAttribute(PERSON)).getId();
         String email = ((Person) session.getAttribute(PERSON)).getEmail();
 
-        Person person = Person.builder()   //TODO доделать обработку вводимых данных
+        Person person = Person.builder()
                 .id(id)
                 .firstName(firstName)
                 .lastName(lastName)
@@ -60,8 +65,8 @@ public class Settings extends ServletWrapper {
                 .info(info)
                 .build();
         session.setAttribute(PERSON, person);
-
-        person.setPassword(password);
+        if (!password.equals(""))
+            person.setPassword(password);
         personDao.update(person);
         resp.sendRedirect("/Profile/" + id);
     }

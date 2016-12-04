@@ -1,6 +1,6 @@
 package servlets;
 
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 import models.Person;
 
 import javax.servlet.ServletException;
@@ -11,23 +11,21 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
 
-import static servlets.ServletConst.ERROR;
-import static servlets.ServletConst.PERSON;
-import static servlets.ServletConst.URL;
+import static servlets.ServletConst.*;
 
-@Log
+@Slf4j
 @WebServlet("/SignUp")
 public class SignUp extends ServletWrapper {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        log.info(() -> " doGet");
+        log.info("doGet");
         req.getSession().setAttribute(URL, "/SignUp");
         req.getRequestDispatcher("/WEB-INF/auth/signUp.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        log.info(() -> "Registration");
+        log.info("Registration");
         HttpSession session = req.getSession();
 
 

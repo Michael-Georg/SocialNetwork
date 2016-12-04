@@ -1,6 +1,6 @@
 package servlets;
 
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 import models.Person;
 
 import javax.servlet.ServletException;
@@ -11,8 +11,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 import static servlets.ServletConst.*;
-
-@Log
+@Slf4j
 @WebServlet({"/BlackList", "/Following", "/Followers"})
 public class Friends extends ServletWrapper {
     @Override
@@ -40,6 +39,7 @@ public class Friends extends ServletWrapper {
                 break;
             }
         }
+        log.info("Set url to session attribute{} ", url);
         session.setAttribute(URL, url);
         req.getRequestDispatcher("/WEB-INF/user/results.jsp").forward(req, resp);
     }

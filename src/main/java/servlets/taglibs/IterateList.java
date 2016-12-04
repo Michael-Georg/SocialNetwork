@@ -23,7 +23,7 @@ public class IterateList extends TagSupport {
     public int doStartTag() {
         List<Person> list = (List<Person>) pageContext.findAttribute(collection);
         if (list == null) {
-            log.info("Error in taglib");
+            log.info("List of Persons is empty");
         } else {
             JspWriter out = pageContext.getOut();
             try {

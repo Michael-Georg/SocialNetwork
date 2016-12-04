@@ -1,10 +1,10 @@
 package servlets.listeners;
 
-import Dao.RelationDao;
 import Dao.MessageDao;
 import Dao.PersonDao;
+import Dao.RelationDao;
 import Dao.common.ConnectionPool;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 import org.h2.Driver;
 
 import javax.servlet.ServletContext;
@@ -23,8 +23,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static servlets.ServletConst.*;
-
-@Log
+@Slf4j
 @WebListener
 public class Init implements ServletContextListener {
     private static ConnectionPool connectionPool;
@@ -34,8 +33,7 @@ public class Init implements ServletContextListener {
         String realPath = context.getRealPath("/");
         connectionPool = ConnectionPool.create(realPath + config);
         initDb(connectionPool, realPath + pathToInit);
-
-
+        log.info("Connection pool initialize");
         context.setAttribute(FRIENDS_DAO, new RelationDao(connectionPool));
         context.setAttribute(PERSON_DAO, new PersonDao(connectionPool));
         context.setAttribute(MESSAGE_DAO, new MessageDao(connectionPool));
@@ -48,9 +46,9 @@ public class Init implements ServletContextListener {
             Driver driver = Driver.load();
             DriverManager.deregisterDriver(driver);
         } catch (SQLException e) {
-            log.warning(e::getMessage);
+            log.error("Failed database destroying", e);
         }
-        log.info(() -> "Connection pool and DBManager closed" );
+        log.info("Database driver destroyed");
     }
 
     public void initDb(ConnectionPool connectionPool, String pathToInit) {
@@ -68,8 +66,8 @@ public class Init implements ServletContextListener {
                     });
             statement.executeBatch();
         } catch (IOException | SQLException e) {
-            e.printStackTrace();
-
+            log.error("Start database initialization failed", e);
         }
+        log.info("Database initialize correct");
     }
 }

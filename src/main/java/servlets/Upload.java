@@ -29,8 +29,7 @@ public class Upload extends ServletWrapper{
         Part filePart = req.getPart("file");
         int id = ((Person) req.getSession().getAttribute(PERSON)).getId();
         filePart.write(getServletContext().getRealPath("/images/") + id + ".jpg" );
-        log.info("avatar upload");
+        log.info("avatar for user {} upload", id);
         resp.sendRedirect("/Profile/" + id);
-
     }
 }

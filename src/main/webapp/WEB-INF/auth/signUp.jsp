@@ -27,13 +27,13 @@
         <div class="settings-line">
             <label class="settings-label" for="firstName">${firstName}</label>
             <input class="settings-input" id="firstName" name="firstName"
-                   maxlength="30" pattern="[A-Za-zА-Яа-я]{2,}" required>
+                   maxlength="20" pattern="[A-Za-zА-Яа-я]{2,}" required>
             <span></span>
         </div>
         <div class="settings-line">
             <label class="settings-label" for="lastName">${lastName}</label>
             <input class="settings-input" id="lastName" name="lastName"
-                   maxlength="30" pattern="[A-Za-zА-Яа-я]{2,}" required>
+                   maxlength="20" pattern="[A-Za-zА-Яа-я]{2,}" required>
             <span></span>
         </div>
         <div class="settings-line">

@@ -1,5 +1,5 @@
 window.onload = init;
-const url = "ws://localhost:8080" + window.location.pathname;
+const url = "ws://"+ window.location.host + window.location.pathname;
 const socket = new WebSocket(url);
 socket.onmessage = onMessage;
 
@@ -38,7 +38,7 @@ function forPrintMsg(msg, parent) {
     msgDate.appendChild(document.createTextNode(msg.time));
     msgAuthorHeader.appendChild(msgDate);
 
-    const msgText = document.createElement("div");
+    const msgText = document.createElement("pre");
     msgText.setAttribute("class", "post-text");
     msgText.appendChild(document.createTextNode(msg.text));
     parent.appendChild(msgText);

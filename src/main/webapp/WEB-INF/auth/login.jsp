@@ -26,10 +26,10 @@
         <form name="login" method="post" action="${pageContext.request.contextPath}/Login">
 
             <input id="email" class="reg" name="email" title="Login"
-                   placeholder="${mail}" maxlength="30" autofocus/>
+                   placeholder="${mail}" maxlength="20" autofocus/>
 
             <input class="reg" placeholder="${password}" type="password" name="password"
-                   autocomplete="off" maxlength="30" title="Password"/>
+                   autocomplete="off" maxlength="255" title="Password"/>
             <div class="errmsg">
                 <c:if test='${not empty requestScope.error}'>
                     ${errMsg}

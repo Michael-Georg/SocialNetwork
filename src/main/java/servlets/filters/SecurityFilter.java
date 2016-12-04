@@ -1,6 +1,6 @@
 package servlets.filters;
 
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -13,14 +13,13 @@ import java.io.IOException;
 
 import static servlets.ServletConst.PERSON;
 
-@Log
+@Slf4j
 @WebFilter({"/", "/Profile/*", "/Settings", "/Friends", "/Upload"})
 public class SecurityFilter extends HttpFilter {
 
     @Override
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpSession session = request.getSession();
-//        log.info(request::getRequestURI);
         if (session.getAttribute(PERSON) != null)
             chain.doFilter(request, response);
         else {

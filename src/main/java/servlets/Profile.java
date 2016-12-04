@@ -1,6 +1,6 @@
 package servlets;
 
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 import models.Person;
 
 import javax.servlet.ServletException;
@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 
 import static servlets.ServletConst.*;
 
-@Log
+@Slf4j
 @WebServlet("/Profile/*")
 public class Profile extends ServletWrapper {
 
@@ -46,6 +46,7 @@ public class Profile extends ServletWrapper {
             req.setAttribute(FRIEND_STATUS, relationDao.getRelation(person_id, user_id));
             req.getRequestDispatcher("/WEB-INF/user/profile.jsp").forward(req, resp);
         } else {
+            log.warn("user not found");
             resp.sendRedirect("/WEB-INF/auth/error/");
         }
     }
